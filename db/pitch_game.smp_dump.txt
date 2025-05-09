@@ -1,0 +1,6 @@
+
+State Machine - |position_tb|position:position_inst|state
+Name state.STATE_IDLE state.STATE_GAME_OVER state.STATE_PLAY 
+state.STATE_IDLE 0 0 0 
+state.STATE_PLAY 1 0 1 
+state.STATE_GAME_OVER 1 1 0 

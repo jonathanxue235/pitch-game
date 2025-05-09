@@ -1,0 +1,18 @@
+module position_tb (
+	output logic clk,
+    output logic reset,
+    output logic start_button,
+    output logic [9:0] bird_y,
+    output logic collided,
+    output logic enable,
+
+    output logic [9:0] pipe_x,
+    output logic [9:0] pipe_y_top,
+    output logic [9:0] pipe_y_bot,
+	 output logic led1,
+	 output logic led2,
+	 output logic led3
+);
+
+
+endmodule
