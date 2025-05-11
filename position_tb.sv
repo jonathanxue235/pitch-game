@@ -78,7 +78,8 @@ end
 
 
 initial begin
-	
+	$dumpfile("position_tb.vcd");	
+	$dumpvars(0, position_tb);
 	reset = 1;
 	start_button = 0;
 	#2;
@@ -88,7 +89,6 @@ initial begin
 	#2;
 	start_button = 0;
 	#230;
-	$stop;
 end
 
 endmodule
