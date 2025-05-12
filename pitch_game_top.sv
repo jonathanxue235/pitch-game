@@ -78,34 +78,22 @@ clock_divider mic_sample(
     .clk_out(mic_freq)
 );
 
+logic filtered_pitch_present;
+logic [5:0] dominant_bin_index;
+logic [63:0][35:0] dbg_bin_magnitudes_squared;
 
-		input  wire        clk,          //    clk.clk
-		input  wire        reset_n,      //    rst.reset_n
-		input  wire        sink_valid,   //   sink.sink_valid
-		output wire        sink_ready,   //       .sink_ready
-		input  wire [1:0]  sink_error,   //       .sink_error
-		input  wire        sink_sop,     //       .sink_sop
-		input  wire        sink_eop,     //       .sink_eop
-		input  wire [11:0] sink_real,    //       .sink_real
-		input  wire [11:0] sink_imag,    //       .sink_imag
-		input  wire [6:0]  fftpts_in,    //       .fftpts_in
-		input  wire [0:0]  inverse,      //       .inverse
-		output wire        source_valid, // source.source_valid
-		input  wire        source_ready, //       .source_ready
-		output wire [1:0]  source_error, //       .source_error
-		output wire        source_sop,   //       .source_sop
-		output wire        source_eop,   //       .source_eop
-		output wire [18:0] source_real,  //       .source_real
-		output wire [18:0] source_imag,  //       .source_imag
-		output wire [6:0]  fftpts_out    //       .fftpts_out
-
-fft_64 mic_pitch(
+adc_sound_filter adc_sound_filter_inst (
+	// Input
 	.clk(clk),
-	.
-	
+	.reset_n(resetNot),
+	.mic_sample_clk(mic_freq),
+	.adc_mic_data(mic_out),
+
+	// Output
+	.filtered_pitch_present(filtered_pitch_present),
+	.dominant_bin_index(dominant_bin_index),
+	.dbg_bin_magnitudes_squared(dbg_bin_magnitudes_squared)
 );
-
-
 
 
 logic collided;

@@ -1,8 +1,8 @@
 module position_tb (
-	 output logic clk,
+	output logic clk,
     output logic reset,
     output logic start_button,
-	 output logic [9:0] bird_x,
+	output logic [9:0] bird_x,
     output logic [9:0] bird_y,
     output logic collided,
     output logic enable,
@@ -10,11 +10,11 @@ module position_tb (
     output logic [9:0] pipe_x,
     output logic [9:0] pipe_y_top,
     output logic [9:0] pipe_y_bot,
-	 output logic led1,
-	 output logic led2,
-	 output logic led3,
-	 
-	 output logic [1:0] state
+	output logic led1,
+	output logic led2,
+	output logic led3,
+	
+	output logic [1:0] state
 );
 
 assign bird_x = 100;
