@@ -1,10 +1,10 @@
-Analysis & Synthesis Status : Successful - Fri May  9 03:14:19 2025
+Analysis & Synthesis Status : Successful - Mon May 12 09:35:29 2025
 Quartus Prime Version : 23.1std.1 Build 993 05/14/2024 SC Lite Edition
 Revision Name : pitch_game_top
 Top-level Entity Name : pitch_game_top
 Family : MAX 10
-Total logic elements : 193
-    Total combinational functions : 193
+Total logic elements : 181
+    Total combinational functions : 181
     Dedicated logic registers : 96
 Total registers : 96
 Total pins : 53

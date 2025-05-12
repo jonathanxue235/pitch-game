@@ -1,4 +1,4 @@
-module microphone (
+module microphone_old (
     input logic clk,
     input logic reset,
     input logic [11:0] mic,
