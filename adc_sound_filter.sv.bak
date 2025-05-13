@@ -21,11 +21,11 @@ module adc_sound_filter #(
 );
 
     // --- Derived Parameters for Frequency Bins ---
-    localparam real REAL_FREQ_RESOLUTION = 15.625;
-    localparam int K_MIN_TARGET = 4;// 50 Hz
-    localparam int K_MAX_TARGET = 32;// 500 Hz
-    localparam int ACTUAL_K_MIN = 4; // Ensure we don't use DC for pitch if 0-index
-    localparam int ACTUAL_K_MAX = 32;
+    localparam real REAL_FREQ_RESOLUTION = real'(SAMPLING_RATE_HZ) / FFT_POINTS;
+    localparam int K_MIN_TARGET = integer'($ceil(real'(50.0) / REAL_FREQ_RESOLUTION)); // 50 Hz
+    localparam int K_MAX_TARGET = integer'($floor(real'(500.0) / REAL_FREQ_RESOLUTION)); // 500 Hz
+    localparam int ACTUAL_K_MIN = (K_MIN_TARGET < 1) ? 1 : K_MIN_TARGET; // Ensure we don't use DC for pitch if 0-index
+    localparam int ACTUAL_K_MAX = (K_MAX_TARGET > FFT_POINTS/2) ? FFT_POINTS/2 : K_MAX_TARGET;
 
     // --- Signals for FFT IP Interface ---
     logic        fft_sink_valid;
@@ -166,9 +166,7 @@ module adc_sound_filter #(
             fft_sink_sop <= 1'b0;
             fft_sink_eop <= 1'b0;
             fft_source_ready <= 1'b0;
-				filtered_pitch_present <= filtered_pitch_present;
-				dominant_bin_index <= dominant_bin_index;
-				process_output_now <= process_output_now;
+
             case (next_state)
                 S_SEND_FFT_DATA: begin
                     fft_sink_valid <= 1'b1;
@@ -228,7 +226,6 @@ module adc_sound_filter #(
             end
         endcase
     end
-	 
 
     // --- FFT Output Processing and Filtering Logic ---
     always_ff @(posedge clk or negedge reset_n) begin
@@ -242,18 +239,17 @@ module adc_sound_filter #(
             end
         end else begin
             if (process_output_now) begin
-                logic [MAG_SQ_WIDTH-1:0] sum_selected_magnitudes;
-					 sum_selected_magnitudes<= 0;
+                logic [MAG_SQ_WIDTH-1:0] sum_selected_magnitudes = '0;
                 logic signed [FFT_OUTPUT_WIDTH-1:0] temp_real, temp_imag;
                 logic [MAG_SQ_WIDTH-1:0] current_mag_sq_val_calc [FFT_POINTS/2:0]; // Temporary for calculation
 
                 // Calculate all squared magnitudes first
                 temp_real = fft_real_buffer[0];
-                current_mag_sq_val_calc[0] <= temp_real * temp_real;
+                current_mag_sq_val_calc[0] = temp_real * temp_real;
                 for (int k = 1; k < FFT_POINTS/2; k++) begin
-                    temp_real <= fft_real_buffer[k];
-                    temp_imag <= fft_imag_buffer[k];
-                    current_mag_sq_val_calc[k] <= (temp_real * temp_real) + (temp_imag * temp_imag);
+                    temp_real = fft_real_buffer[k];
+                    temp_imag = fft_imag_buffer[k];
+                    current_mag_sq_val_calc[k] = (temp_real * temp_real) + (temp_imag * temp_imag);
                 end
                 temp_real = fft_real_buffer[FFT_POINTS/2];
                 current_mag_sq_val_calc[FFT_POINTS/2] = temp_real * temp_real;
@@ -264,8 +260,8 @@ module adc_sound_filter #(
                 end
 
                 // Find dominant bin within the specified range and sum magnitudes
-                max_magnitude_in_range <= '0; // Reset for current frame
-                current_dominant_bin_idx <= ACTUAL_K_MIN; // Default to start of range or 0 if range is invalid
+                max_magnitude_in_range = '0; // Reset for current frame
+                current_dominant_bin_idx = ACTUAL_K_MIN; // Default to start of range or 0 if range is invalid
 
                 for (int k = ACTUAL_K_MIN; k <= ACTUAL_K_MAX; k++) begin
                     if (k >= 0 && k <= FFT_POINTS/2) begin // Bounds check
@@ -281,8 +277,6 @@ module adc_sound_filter #(
                 filtered_pitch_present <= (sum_selected_magnitudes > ENERGY_THRESHOLD);
 
             end
-				dominant_bin_index <= dominant_bin_index;
-				filtered_pitch_present <= filtered_pitch_present;
         end
     end
 

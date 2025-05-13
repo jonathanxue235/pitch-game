@@ -1,40 +1,23 @@
-module adc_sound_filter #(
-    parameter ADC_WIDTH = 12,
-    parameter FFT_POINTS = 64,
-    parameter SAMPLING_RATE_HZ = 1000,
-    parameter FFT_INPUT_WIDTH = 12,      // From your FFT module (sink_real/imag)
-    parameter FFT_OUTPUT_WIDTH = 19,     // From your FFT module (source_real/imag)
-    parameter MAG_SQ_WIDTH = 2 * FFT_OUTPUT_WIDTH + 1,
-    parameter ENERGY_THRESHOLD = 5000000 // Example threshold, needs tuning
-) (
-    input logic clk,         // Main system clock
-    input logic reset_n,     // System reset
+module pitch_detector (
+	input logic clk,         // Main system clock
+   input logic reset_n,     // System reset
 
-    // ADC Inputs
-    input logic mic_sample_clk, // Your 1kHz 'mic_freq'
-    input logic signed [ADC_WIDTH-1:0] adc_mic_data, // Your 'mic_out'
+   // ADC Inputs
+   input logic mic_sample_clk, // Your 1kHz 'mic_freq'
+   input logic signed [11:0] adc_mic_data, // Your 'mic_out'
 
-    // Output
-    output logic filtered_pitch_present,
-    output logic [$clog2(FFT_POINTS/2 + 1)-1:0] dominant_bin_index, // Index of bin with highest magnitude in range
-    output logic [FFT_POINTS/2:0][MAG_SQ_WIDTH-1:0] dbg_bin_magnitudes_squared // Magnitudes of bins 0 to N/2
+   // Output
+   output logic [5:0] dominant_bin_index, // Index of bin with highest magnitude in range
 );
 
-    // --- Derived Parameters for Frequency Bins ---
-    localparam real REAL_FREQ_RESOLUTION = 15.625;
-    localparam int K_MIN_TARGET = 4;// 50 Hz
-    localparam int K_MAX_TARGET = 32;// 500 Hz
-    localparam int ACTUAL_K_MIN = 4; // Ensure we don't use DC for pitch if 0-index
-    localparam int ACTUAL_K_MAX = 32;
-
-    // --- Signals for FFT IP Interface ---
+	// --- Signals for FFT IP Interface ---
     logic        fft_sink_valid;
     logic        fft_sink_ready;
     logic [1:0]  fft_sink_error;
     logic        fft_sink_sop;
     logic        fft_sink_eop;
-    logic signed [FFT_INPUT_WIDTH-1:0] fft_sink_real_data;
-    logic signed [FFT_INPUT_WIDTH-1:0] fft_sink_imag_data;
+    logic signed [11:0] fft_sink_real_data;
+    logic signed [11:0] fft_sink_imag_data;
     logic [6:0]  fft_fftpts_in;
     logic        fft_inverse_in;
 
@@ -43,8 +26,8 @@ module adc_sound_filter #(
     logic [1:0]  fft_source_error;
     logic        fft_source_sop;
     logic        fft_source_eop;
-    logic signed [FFT_OUTPUT_WIDTH-1:0] fft_source_real_data;
-    logic signed [FFT_OUTPUT_WIDTH-1:0] fft_source_imag_data;
+    logic signed [11:0] fft_source_real_data;
+    logic signed [11:0] fft_source_imag_data;
     logic [6:0]  fft_fftpts_out;
 
 
@@ -70,9 +53,9 @@ module adc_sound_filter #(
         .source_imag  (fft_source_imag_data),
         .fftpts_out   (fft_fftpts_out)
     );
-
-    // --- Internal State and Data Buffers ---
-    typedef enum logic [2:0] {
+	 
+	 
+	 typedef enum logic [2:0] {
         S_IDLE,
         S_WAIT_ADC_SAMPLE,
         S_SEND_FFT_DATA,
@@ -80,22 +63,26 @@ module adc_sound_filter #(
         S_PROCESS_FFT_OUTPUT
     } state_e;
     state_e current_state, next_state;
-
-    logic signed [ADC_WIDTH-1:0] captured_adc_data;
+	 
+	 
+	 logic signed [ADC_WIDTH-1:0] captured_adc_data;
     logic adc_data_rdy_flag;
 
-    logic [$clog2(FFT_POINTS)-1:0] send_sample_count;
-    logic [$clog2(FFT_POINTS)-1:0] receive_sample_count;
+    logic [5:0] send_sample_count;
+    logic [5:0] receive_sample_count;
 
-    logic signed [FFT_OUTPUT_WIDTH-1:0] fft_real_buffer [FFT_POINTS-1:0];
-    logic signed [FFT_OUTPUT_WIDTH-1:0] fft_imag_buffer [FFT_POINTS-1:0];
+    logic signed [18:0] fft_real_buffer [63:0];
+    logic signed [18:0] fft_imag_buffer [63:0];
     logic process_output_now;
 
     // For finding dominant bin
-    logic [MAG_SQ_WIDTH-1:0] max_magnitude_in_range;
-    logic [$clog2(FFT_POINTS/2 + 1)-1:0] current_dominant_bin_idx;
-
-
+    logic [38:0] max_magnitude_in_range;
+    logic [5:0] current_dominant_bin_idx;
+	 
+	 logic filtered_pitch_present;
+	 logic [32:0][38:0] dbg_bin_magnitudes_squared
+	 
+	 
     // --- ADC Data Capture Logic (from mic_sample_clk domain to clk domain) ---
     logic mic_sample_clk_prev;
     always_ff @(posedge clk or negedge reset_n) begin
@@ -103,17 +90,20 @@ module adc_sound_filter #(
             mic_sample_clk_prev <= 1'b0;
             adc_data_rdy_flag <= 1'b0;
         end else begin
-            mic_sample_clk_prev <= mic_sample_clk;
-            adc_data_rdy_flag <= 1'b0;
-            if (mic_sample_clk == 1'b1 && mic_sample_clk_prev == 1'b0) begin
+            if (mic_sample_clk == 1'b1 && mic_sample_clk_prev == 1'b0) begin // Basically detects posedge of mic_sample_clk
                 captured_adc_data <= adc_mic_data;
                 adc_data_rdy_flag <= 1'b1;
-            end
+            end else begin
+					adc_data_rdy_flag <= 1'b0;
+				end
+				mic_sample_clk_prev <= mic_sample_clk;
+            
         end
     end
-
+	 
+	 
     // --- Control FSM and Data Path Logic ---
-    assign fft_fftpts_in = FFT_POINTS;
+    assign fft_fftpts_in = 64;
     assign fft_inverse_in = 1'b0;
     assign fft_sink_error = 2'b00;
 
@@ -228,7 +218,6 @@ module adc_sound_filter #(
             end
         endcase
     end
-	 
 
     // --- FFT Output Processing and Filtering Logic ---
     always_ff @(posedge clk or negedge reset_n) begin
@@ -242,8 +231,7 @@ module adc_sound_filter #(
             end
         end else begin
             if (process_output_now) begin
-                logic [MAG_SQ_WIDTH-1:0] sum_selected_magnitudes;
-					 sum_selected_magnitudes<= 0;
+                logic [MAG_SQ_WIDTH-1:0] sum_selected_magnitudes <= '0;
                 logic signed [FFT_OUTPUT_WIDTH-1:0] temp_real, temp_imag;
                 logic [MAG_SQ_WIDTH-1:0] current_mag_sq_val_calc [FFT_POINTS/2:0]; // Temporary for calculation
 
@@ -285,5 +273,8 @@ module adc_sound_filter #(
 				filtered_pitch_present <= filtered_pitch_present;
         end
     end
+	 
+	 
+
 
 endmodule

@@ -1,16 +1,16 @@
-Analysis & Synthesis Status : Successful - Mon May 12 09:35:29 2025
+Analysis & Synthesis Status : Failed - Mon May 12 17:20:56 2025
 Quartus Prime Version : 23.1std.1 Build 993 05/14/2024 SC Lite Edition
 Revision Name : pitch_game_top
-Top-level Entity Name : pitch_game_top
+Top-level Entity Name : adc_sound_filter_tb
 Family : MAX 10
-Total logic elements : 181
-    Total combinational functions : 181
-    Dedicated logic registers : 96
-Total registers : 96
-Total pins : 53
-Total virtual pins : 0
-Total memory bits : 0
-Embedded Multiplier 9-bit elements : 0
-Total PLLs : 0
-UFM blocks : 0
-ADC blocks : 0
+Total logic elements : N/A until Partition Merge
+    Total combinational functions : N/A until Partition Merge
+    Dedicated logic registers : N/A until Partition Merge
+Total registers : N/A until Partition Merge
+Total pins : N/A until Partition Merge
+Total virtual pins : N/A until Partition Merge
+Total memory bits : N/A until Partition Merge
+Embedded Multiplier 9-bit elements : N/A until Partition Merge
+Total PLLs : N/A until Partition Merge
+UFM blocks : N/A until Partition Merge
+ADC blocks : N/A until Partition Merge

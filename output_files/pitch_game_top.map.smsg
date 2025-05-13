@@ -1,1 +1,2 @@
+Warning (10268): Verilog HDL information at adc_sound_filter.sv(234): always construct contains both blocking and non-blocking assignments File: C:/Users/jonathanxue/Developer/DAV/pitch-game/adc_sound_filter.sv Line: 234
 Warning (10273): Verilog HDL warning at altera_modular_adc_control_fsm.v(718): extended using "x" or "z" File: C:/Users/jonathanxue/Developer/DAV/pitch-game/mic/synthesis/submodules/altera_modular_adc_control_fsm.v Line: 718
