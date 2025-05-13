@@ -77,18 +77,6 @@ set_location_assignment PIN_B10 -to led3
 set_location_assignment PIN_B8 -to start_button_not
 set_global_assignment -name POWER_PRESET_COOLING_SOLUTION "23 MM HEAT SINK WITH 200 LFPM AIRFLOW"
 set_global_assignment -name POWER_BOARD_THERMAL_MODEL "NONE (CONSERVATIVE)"
-set_global_assignment -name SYSTEMVERILOG_FILE adc_sound_filter_tb.sv
-set_global_assignment -name SYSTEMVERILOG_FILE adc_sound_filter.sv
-set_global_assignment -name QIP_FILE fft_64/synthesis/fft_64.qip
-set_global_assignment -name QIP_FILE mic/synthesis/mic.qip
-set_global_assignment -name SYSTEMVERILOG_FILE vga.sv
-set_global_assignment -name SYSTEMVERILOG_FILE prng.sv
-set_global_assignment -name SYSTEMVERILOG_FILE position.sv
-set_global_assignment -name SYSTEMVERILOG_FILE pitch_game_top.sv
-set_global_assignment -name SYSTEMVERILOG_FILE pitch_game_tb.sv
-set_global_assignment -name SYSTEMVERILOG_FILE collision.sv
-set_global_assignment -name SYSTEMVERILOG_FILE clock_divider.sv
-set_global_assignment -name SYSTEMVERILOG_FILE position_tb.sv
 set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
 set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
 set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
@@ -98,5 +86,16 @@ set_global_assignment -name EDA_TEST_BENCH_NAME adc_filter_test -section_id eda_
 set_global_assignment -name EDA_DESIGN_INSTANCE_NAME NA -section_id adc_filter_test
 set_global_assignment -name EDA_TEST_BENCH_MODULE_NAME adc_sound_filter_tb -section_id adc_filter_test
 set_global_assignment -name EDA_TEST_BENCH_FILE adc_sound_filter_tb.sv -section_id adc_filter_test -hdl_version SystemVerilog_2005
-set_global_assignment -name SYSTEMVERILOG_FILE pitch_detector.sv
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
+set_global_assignment -name SYSTEMVERILOG_FILE fft.sv
+set_global_assignment -name SYSTEMVERILOG_FILE butterfly.sv
+set_global_assignment -name QIP_FILE mic/synthesis/mic.qip
+set_global_assignment -name SYSTEMVERILOG_FILE vga.sv
+set_global_assignment -name SYSTEMVERILOG_FILE prng.sv
+set_global_assignment -name SYSTEMVERILOG_FILE position.sv
+set_global_assignment -name SYSTEMVERILOG_FILE pitch_game_top.sv
+set_global_assignment -name SYSTEMVERILOG_FILE pitch_game_tb.sv
+set_global_assignment -name SYSTEMVERILOG_FILE collision.sv
+set_global_assignment -name SYSTEMVERILOG_FILE clock_divider.sv
+set_global_assignment -name SYSTEMVERILOG_FILE position_tb.sv
+set_global_assignment -name SYSTEMVERILOG_FILE pitch_detector.sv
