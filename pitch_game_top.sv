@@ -56,16 +56,11 @@ assign pipe_height = 100;
 
 
 logic vga_clk;
-logic [11:0] mic_out;
+logic [11:0] mic_data;
 logic mic_freq;
 
 
-mic mic_inst (
-    // Input
-    .CLOCK(clk),
-    .RESET(resetNot),
-	 .CH0(mic_out)
-);
+
 
 
 clock_divider mic_sample(
@@ -78,21 +73,17 @@ clock_divider mic_sample(
     .clk_out(mic_freq)
 );
 
-logic filtered_pitch_present;
-logic [5:0] dominant_bin_index;
-logic [63:0][35:0] dbg_bin_magnitudes_squared;
 
-adc_sound_filter adc_sound_filter_inst (
-	// Input
-	.clk(clk),
-	.reset_n(resetNot),
-	.mic_sample_clk(mic_freq),
-	.adc_mic_data(mic_out),
 
-	// Output
-	.filtered_pitch_present(filtered_pitch_present),
-	.dominant_bin_index(dominant_bin_index),
-	.dbg_bin_magnitudes_squared(dbg_bin_magnitudes_squared)
+
+get_height get_height_inst (
+    // Input
+    .clk(clk),
+    .reset(reset),
+    .mic_data(mic_data),
+
+    // Output
+    .height(bird_y)
 );
 
 

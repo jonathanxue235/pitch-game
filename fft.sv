@@ -1,3 +1,7 @@
+/**
+*
+* TODO: This could be implemented better and more cleanly
+*/
 module fft_64_parallel (
     input clk,
     input reset,
