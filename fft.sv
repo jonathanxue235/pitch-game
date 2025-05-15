@@ -2,7 +2,7 @@
 *
 * TODO: This could be implemented better and more cleanly
 */
-module fft_64_parallel (
+module fft (
     input clk,
     input reset,
     input start,
@@ -21,72 +21,72 @@ logic [31:0] f_w [31:0];
 logic [31:0] f_out0 [31:0];
 logic [31:0] f_out1 [31:0];
 
-logic [31:0] i [63:0];
+logic [31:0] in_reorder [63:0];
 always_comb begin
-    i[0] = in[0];
-    i[1] = in[32];
-    i[2] = in[16];
-    i[3] = in[48];
-    i[4] = in[8];
-    i[5] = in[40];
-    i[6] = in[24];
-    i[7] = in[56];
-    i[8] = in[4];
-    i[9] = in[36];
-    i[10] = in[20];
-    i[11] = in[52];
-    i[12] = in[12];
-    i[13] = in[44];
-    i[14] = in[28];
-    i[15] = in[60];
-    i[16] = in[2];
-    i[17] = in[34];
-    i[18] = in[18];
-    i[19] = in[50];
-    i[20] = in[10];
-    i[21] = in[42];
-    i[22] = in[26];
-    i[23] = in[58];
-    i[24] = in[6];
-    i[25] = in[38];
-    i[26] = in[22];
-    i[27] = in[54];
-    i[28] = in[14];
-    i[29] = in[46];
-    i[30] = in[30];
-    i[31] = in[62];
-    i[32] = in[1];
-    i[33] = in[33];
-    i[34] = in[17];
-    i[35] = in[49];
-    i[36] = in[9];
-    i[37] = in[41];
-    i[38] = in[25];
-    i[39] = in[57];
-    i[40] = in[5];
-    i[41] = in[37];
-    i[42] = in[21];
-    i[43] = in[53];
-    i[44] = in[13];
-    i[45] = in[45];
-    i[46] = in[29];
-    i[47] = in[61];
-    i[48] = in[3];
-    i[49] = in[35];
-    i[50] = in[19];
-    i[51] = in[51];
-    i[52] = in[11];
-    i[53] = in[43];
-    i[54] = in[27];
-    i[55] = in[59];
-    i[56] = in[7];
-    i[57] = in[39];
-    i[58] = in[23];
-    i[59] = in[55];
-    i[60] = in[15];
-    i[61] = in[47];
-    i[62] = in[31];
-    i[63] = in[63];
+    in_reorder[0] = in[0];
+    in_reorder[1] = in[32];
+    in_reorder[2] = in[16];
+    in_reorder[3] = in[48];
+    in_reorder[4] = in[8];
+    in_reorder[5] = in[40];
+    in_reorder[6] = in[24];
+    in_reorder[7] = in[56];
+    in_reorder[8] = in[4];
+    in_reorder[9] = in[36];
+    in_reorder[10] = in[20];
+    in_reorder[11] = in[52];
+    in_reorder[12] = in[12];
+    in_reorder[13] = in[44];
+    in_reorder[14] = in[28];
+    in_reorder[15] = in[60];
+    in_reorder[16] = in[2];
+    in_reorder[17] = in[34];
+    in_reorder[18] = in[18];
+    in_reorder[19] = in[50];
+    in_reorder[20] = in[10];
+    in_reorder[21] = in[42];
+    in_reorder[22] = in[26];
+    in_reorder[23] = in[58];
+    in_reorder[24] = in[6];
+    in_reorder[25] = in[38];
+    in_reorder[26] = in[22];
+    in_reorder[27] = in[54];
+    in_reorder[28] = in[14];
+    in_reorder[29] = in[46];
+    in_reorder[30] = in[30];
+    in_reorder[31] = in[62];
+    in_reorder[32] = in[1];
+    in_reorder[33] = in[33];
+    in_reorder[34] = in[17];
+    in_reorder[35] = in[49];
+    in_reorder[36] = in[9];
+    in_reorder[37] = in[41];
+    in_reorder[38] = in[25];
+    in_reorder[39] = in[57];
+    in_reorder[40] = in[5];
+    in_reorder[41] = in[37];
+    in_reorder[42] = in[21];
+    in_reorder[43] = in[53];
+    in_reorder[44] = in[13];
+    in_reorder[45] = in[45];
+    in_reorder[46] = in[29];
+    in_reorder[47] = in[61];
+    in_reorder[48] = in[3];
+    in_reorder[49] = in[35];
+    in_reorder[50] = in[19];
+    in_reorder[51] = in[51];
+    in_reorder[52] = in[11];
+    in_reorder[53] = in[43];
+    in_reorder[54] = in[27];
+    in_reorder[55] = in[59];
+    in_reorder[56] = in[7];
+    in_reorder[57] = in[39];
+    in_reorder[58] = in[23];
+    in_reorder[59] = in[55];
+    in_reorder[60] = in[15];
+    in_reorder[61] = in[47];
+    in_reorder[62] = in[31];
+    in_reorder[63] = in[63];
 end
 
 butterfly fft0(.A(f_a[0]), .B(f_b[0]), .W(f_w[0]), .out0(f_out0[0]), .out1(f_out1[0]));
@@ -186,8 +186,8 @@ always_ff @(posedge clk) begin
 		end
 		STAGE1: begin
             for (int i = 0; i < 32; i++) begin
-                f_a[i] <= i[2 * i];
-                f_b[i] <= i[2 * i + 1];
+                f_a[i] <= in_reorder[2 * i];
+                f_b[i] <= in_reorder[2 * i + 1];
                 f_w[i] <= w_64[0];
             end
             for (int i = 0; i < 64; i++) begin

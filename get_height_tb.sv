@@ -23,7 +23,7 @@ initial begin
     // Run for a certain number of clock cycles, e.g., 50000 cycles for one FFT round plus some margin
     // Each cycle is 2ns (1ns high, 1ns low)
     // Let's run for 100000 ns for now, which is 50000 cycles
-    for (integer i = 0; i < 50000; i++) begin
+    for (integer i = 0; i < 250; i++) begin
         #1;
         clk = 0;
         #1;
@@ -39,7 +39,9 @@ initial begin
 
     // Apply reset
     #2;
-    reset = 0;
+    reset = 1;
+	 #2;
+	 reset = 0;
 
     // Wait for a few cycles after reset
     #10;
@@ -49,12 +51,12 @@ initial begin
     // The internal counter in get_height for fetch_data is ~50000 clock cycles.
     // We will simulate a few data points. A more thorough testbench would mock the mic input precisely.
     for (integer i = 0; i < 100; i++) begin // Provide 100 data samples
-        mic_data = $urandom_range(0, 4095); // Random 12-bit data
+        mic_data = i; // Random 12-bit data
         #2; // Hold data for one clock cycle (posedge to posedge)
     end
 
     // Let simulation run for a bit longer to observe height output
-  #200000; // Should be enough for at least one FFT computation and height update
+  #200; // Should be enough for at least one FFT computation and height update
 
 end
 

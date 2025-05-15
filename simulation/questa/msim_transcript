@@ -13,7 +13,7 @@
 # //  is prohibited from disclosure under the Trade Secrets Act,
 # //  18 U.S.C. Section 1905.
 # //
-# do pitch_game_top_run_msim_rtl_verilog.do
+# do pitch_game_top_run_msim_rtl_systemverilog.do
 # if {[file exists rtl_work]} {
 # 	vdel -lib rtl_work -all
 # }
@@ -24,77 +24,74 @@
 # Copying c:/intelfpga_lite/23.1std/questa_fse/win64/../modelsim.ini to modelsim.ini
 # Modifying modelsim.ini
 # 
-# vlog -sv -work work +incdir+C:/Users/jonathanxue/Developer/DAV/pitch-game {C:/Users/jonathanxue/Developer/DAV/pitch-game/prng.sv}
+# vlog -sv -work work +incdir+C:/Users/jonathanxue/Developer/DAV/pitch-game {C:/Users/jonathanxue/Developer/DAV/pitch-game/get_height_tb.sv}
 # Questa Intel Starter FPGA Edition-64 vlog 2023.3 Compiler 2023.07 Jul 17 2023
-# Start time: 03:02:41 on May 09,2025
-# vlog -reportprogress 300 -sv -work work "+incdir+C:/Users/jonathanxue/Developer/DAV/pitch-game" C:/Users/jonathanxue/Developer/DAV/pitch-game/prng.sv 
-# -- Compiling module prng
+# Start time: 21:51:19 on May 14,2025
+# vlog -reportprogress 300 -sv -work work "+incdir+C:/Users/jonathanxue/Developer/DAV/pitch-game" C:/Users/jonathanxue/Developer/DAV/pitch-game/get_height_tb.sv 
+# -- Compiling module get_height_tb
 # 
 # Top level modules:
-# 	prng
-# End time: 03:02:41 on May 09,2025, Elapsed time: 0:00:00
+# 	get_height_tb
+# End time: 21:51:19 on May 14,2025, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
-# vlog -sv -work work +incdir+C:/Users/jonathanxue/Developer/DAV/pitch-game {C:/Users/jonathanxue/Developer/DAV/pitch-game/position.sv}
+# vlog -sv -work work +incdir+C:/Users/jonathanxue/Developer/DAV/pitch-game {C:/Users/jonathanxue/Developer/DAV/pitch-game/get_height.sv}
 # Questa Intel Starter FPGA Edition-64 vlog 2023.3 Compiler 2023.07 Jul 17 2023
-# Start time: 03:02:41 on May 09,2025
-# vlog -reportprogress 300 -sv -work work "+incdir+C:/Users/jonathanxue/Developer/DAV/pitch-game" C:/Users/jonathanxue/Developer/DAV/pitch-game/position.sv 
-# -- Compiling module position
+# Start time: 21:51:19 on May 14,2025
+# vlog -reportprogress 300 -sv -work work "+incdir+C:/Users/jonathanxue/Developer/DAV/pitch-game" C:/Users/jonathanxue/Developer/DAV/pitch-game/get_height.sv 
+# -- Compiling module get_height
 # 
 # Top level modules:
-# 	position
-# End time: 03:02:41 on May 09,2025, Elapsed time: 0:00:00
+# 	get_height
+# End time: 21:51:19 on May 14,2025, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
-# vlog -sv -work work +incdir+C:/Users/jonathanxue/Developer/DAV/pitch-game {C:/Users/jonathanxue/Developer/DAV/pitch-game/collision.sv}
+# vlog -sv -work work +incdir+C:/Users/jonathanxue/Developer/DAV/pitch-game {C:/Users/jonathanxue/Developer/DAV/pitch-game/fft.sv}
 # Questa Intel Starter FPGA Edition-64 vlog 2023.3 Compiler 2023.07 Jul 17 2023
-# Start time: 03:02:41 on May 09,2025
-# vlog -reportprogress 300 -sv -work work "+incdir+C:/Users/jonathanxue/Developer/DAV/pitch-game" C:/Users/jonathanxue/Developer/DAV/pitch-game/collision.sv 
-# -- Compiling module collision
+# Start time: 21:51:19 on May 14,2025
+# vlog -reportprogress 300 -sv -work work "+incdir+C:/Users/jonathanxue/Developer/DAV/pitch-game" C:/Users/jonathanxue/Developer/DAV/pitch-game/fft.sv 
+# -- Compiling module fft
+# ** Warning: C:/Users/jonathanxue/Developer/DAV/pitch-game/fft.sv(11): (vlog-13314) Defaulting port 'in' kind to 'var' rather than 'wire' due to default compile option setting of -svinputport=relaxed.
 # 
 # Top level modules:
-# 	collision
-# End time: 03:02:41 on May 09,2025, Elapsed time: 0:00:00
-# Errors: 0, Warnings: 0
-# vlog -sv -work work +incdir+C:/Users/jonathanxue/Developer/DAV/pitch-game {C:/Users/jonathanxue/Developer/DAV/pitch-game/position_tb.sv}
+# 	fft
+# End time: 21:51:19 on May 14,2025, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 1
+# vlog -sv -work work +incdir+C:/Users/jonathanxue/Developer/DAV/pitch-game {C:/Users/jonathanxue/Developer/DAV/pitch-game/butterfly.sv}
 # Questa Intel Starter FPGA Edition-64 vlog 2023.3 Compiler 2023.07 Jul 17 2023
-# Start time: 03:02:41 on May 09,2025
-# vlog -reportprogress 300 -sv -work work "+incdir+C:/Users/jonathanxue/Developer/DAV/pitch-game" C:/Users/jonathanxue/Developer/DAV/pitch-game/position_tb.sv 
-# -- Compiling module position_tb
+# Start time: 21:51:19 on May 14,2025
+# vlog -reportprogress 300 -sv -work work "+incdir+C:/Users/jonathanxue/Developer/DAV/pitch-game" C:/Users/jonathanxue/Developer/DAV/pitch-game/butterfly.sv 
+# -- Compiling module butterfly
 # 
 # Top level modules:
-# 	position_tb
-# End time: 03:02:41 on May 09,2025, Elapsed time: 0:00:00
+# 	butterfly
+# End time: 21:51:19 on May 14,2025, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # 
-vsim work.position_tb
-# vsim work.position_tb 
-# Start time: 03:02:43 on May 09,2025
+# vlog -sv -work work +incdir+C:/Users/jonathanxue/Developer/DAV/pitch-game {C:/Users/jonathanxue/Developer/DAV/pitch-game/adc_sound_filter_tb.sv}
+# Questa Intel Starter FPGA Edition-64 vlog 2023.3 Compiler 2023.07 Jul 17 2023
+# Start time: 21:51:19 on May 14,2025
+# vlog -reportprogress 300 -sv -work work "+incdir+C:/Users/jonathanxue/Developer/DAV/pitch-game" C:/Users/jonathanxue/Developer/DAV/pitch-game/adc_sound_filter_tb.sv 
+# ** Error: (vlog-7) Failed to open design unit file "C:/Users/jonathanxue/Developer/DAV/pitch-game/adc_sound_filter_tb.sv" in read mode.
+# No such file or directory. (errno = ENOENT)
+# End time: 21:51:19 on May 14,2025, Elapsed time: 0:00:00
+# Errors: 1, Warnings: 0
+# ** Error: c:/intelfpga_lite/23.1std/questa_fse/win64/vlog failed.
+# Error in macro ./pitch_game_top_run_msim_rtl_systemverilog.do line 13
+# c:/intelfpga_lite/23.1std/questa_fse/win64/vlog failed.
+#     while executing
+# "vlog -sv -work work +incdir+C:/Users/jonathanxue/Developer/DAV/pitch-game {C:/Users/jonathanxue/Developer/DAV/pitch-game/adc_sound_filter_tb.sv}"
+vsim work.get_height_tb
+# vsim work.get_height_tb 
+# Start time: 21:51:23 on May 14,2025
 # ** Note: (vsim-3812) Design is being optimized...
-# ** Warning: C:/Users/jonathanxue/Developer/DAV/pitch-game/position_tb.sv(23): (vopt-2241) Connection width does not match width of port 'bird_x'. The port definition is at: C:/Users/jonathanxue/Developer/DAV/pitch-game/collision.sv(2).
-# ** Warning: C:/Users/jonathanxue/Developer/DAV/pitch-game/position_tb.sv(23): (vopt-2241) Connection width does not match width of port 'bird_width'. The port definition is at: C:/Users/jonathanxue/Developer/DAV/pitch-game/collision.sv(4).
-# ** Warning: C:/Users/jonathanxue/Developer/DAV/pitch-game/position_tb.sv(23): (vopt-2241) Connection width does not match width of port 'bird_height'. The port definition is at: C:/Users/jonathanxue/Developer/DAV/pitch-game/collision.sv(5).
-# ** Warning: C:/Users/jonathanxue/Developer/DAV/pitch-game/position_tb.sv(23): (vopt-2241) Connection width does not match width of port 'pipe_width'. The port definition is at: C:/Users/jonathanxue/Developer/DAV/pitch-game/collision.sv(7).
-# ** Warning: C:/Users/jonathanxue/Developer/DAV/pitch-game/position_tb.sv(23): (vopt-2241) Connection width does not match width of port 'pipe_height'. The port definition is at: C:/Users/jonathanxue/Developer/DAV/pitch-game/collision.sv(8).
-# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=0, Warnings=5.
+# ** Warning: C:/Users/jonathanxue/Developer/DAV/pitch-game/fft.sv(11): (vopt-13314) Defaulting port 'in' kind to 'var' rather than 'wire' due to default compile option setting of -svinputport=relaxed.
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=0, Warnings=1.
 # Loading sv_std.std
-# Loading work.position_tb(fast)
+# Loading work.get_height_tb(fast)
 add wave -position insertpoint  \
-sim:/position_tb/clk \
-sim:/position_tb/reset \
-sim:/position_tb/start_button \
-sim:/position_tb/bird_x \
-sim:/position_tb/bird_y \
-sim:/position_tb/collided \
-sim:/position_tb/enable \
-sim:/position_tb/pipe_x \
-sim:/position_tb/pipe_y_top \
-sim:/position_tb/pipe_y_bot \
-sim:/position_tb/led1 \
-sim:/position_tb/led2 \
-sim:/position_tb/led3 \
-sim:/position_tb/state
+sim:/get_height_tb/clk \
+sim:/get_height_tb/reset \
+sim:/get_height_tb/mic_data \
+sim:/get_height_tb/height
 run -all
-# ** Note: $stop    : C:/Users/jonathanxue/Developer/DAV/pitch-game/position_tb.sv(91)
-#    Time: 238 ns  Iteration: 0  Instance: /position_tb
-# Break at C:/Users/jonathanxue/Developer/DAV/pitch-game/position_tb.sv line 91
-# End time: 13:12:34 on May 09,2025, Elapsed time: 10:09:51
-# Errors: 0, Warnings: 5
+# End time: 21:51:53 on May 14,2025, Elapsed time: 0:00:30
+# Errors: 0, Warnings: 1
