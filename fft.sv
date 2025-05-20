@@ -244,7 +244,7 @@ always_ff @(posedge clk) begin
             for (int i = 0; i < 32; i++) begin
 					 
                 f_a[i] <= in[bit_reversal(2 * i)];
-                f_b[i] <= in[2 * i + 1];
+                f_b[i] <= in[bit_reversal(2 * i + 1)];
                 f_w[i] <= w_64[0];
             end
             for (int i = 0; i < 64; i++) begin
@@ -254,12 +254,12 @@ always_ff @(posedge clk) begin
 		end
 		STAGE2: begin
 			for (int i = 0; i < 16; i++) begin
-                f_a[2 * i] <= f_out0[i];
-                f_b[2 * i] <= f_out0[i + 1];
+                f_a[2 * i] <= f_out0[bit_reversal(i)];
+                f_b[2 * i] <= f_out0[bit_reversal(i + 1)];
                 f_w[2 * i] <= w_64[0];
 
-                f_a[2 * i + 1] <= f_out1[i];
-                f_b[2 * i + 1] <= f_out1[i + 1];
+                f_a[2 * i + 1] <= f_out1[bit_reversal(i)];
+                f_b[2 * i + 1] <= f_out1[bit_reversal(i + 1)];
                 f_w[2 * i + 1] <= w_64[16];
             end
             for (int i = 0; i < 64; i++) begin
@@ -269,20 +269,20 @@ always_ff @(posedge clk) begin
 		end
 		STAGE3: begin
             for (int i = 0; i < 8; i++) begin
-                f_a[4 * i] <= f_out0[i];
-                f_b[4 * i] <= f_out0[i + 2];
+                f_a[4 * i] <= f_out0[bit_reversal(i)];
+                f_b[4 * i] <= f_out0[bit_reversal(i + 2)];
                 f_w[4 * i] <= w_64[0];
 
-                f_a[4 * i + 1] <= f_out0[i + 1];
-                f_b[4 * i + 1] <= f_out0[i + 3];
+                f_a[4 * i + 1] <= f_out0[bit_reversal(i + 1)];
+                f_b[4 * i + 1] <= f_out0[bit_reversal(i + 3)];
                 f_w[4 * i + 1] <= w_64[8];
 
-                f_a[4 * i + 2] <= f_out1[i];
-                f_b[4 * i + 2] <= f_out1[i + 2];
+                f_a[4 * i + 2] <= f_out1[bit_reversal(i)];
+                f_b[4 * i + 2] <= f_out1[bit_reversal(i + 2)];
                 f_w[4 * i + 2] <= w_64[16];
 
-                f_a[4 * i + 3] <= f_out1[i + 1];
-                f_b[4 * i + 3] <= f_out1[i + 3];
+                f_a[4 * i + 3] <= f_out1[bit_reversal(i + 1)];
+                f_b[4 * i + 3] <= f_out1[bit_reversal(i + 3)];
                 f_w[4 * i + 3] <= w_64[24];
             end
 			for (int i = 0; i < 64; i++) begin
@@ -292,36 +292,36 @@ always_ff @(posedge clk) begin
 		end
 		STAGE4: begin
             for (int i = 0; i < 4; i++) begin
-                f_a[8 * i] <= f_out0[i];
-                f_b[8 * i] <= f_out0[i + 4];
+                f_a[8 * i] <= f_out0[bit_reversal(i)];
+                f_b[8 * i] <= f_out0[bit_reversal(i + 4)];
                 f_w[8 * i] <= w_64[0];
 
-                f_a[8 * i + 1] <= f_out0[i + 1];
-                f_b[8 * i + 1] <= f_out0[i + 5];
+                f_a[8 * i + 1] <= f_out0[bit_reversal(i + 1)];
+                f_b[8 * i + 1] <= f_out0[bit_reversal(i + 5)];
                 f_w[8 * i + 1] <= w_64[4];
 
-                f_a[8 * i + 2] <= f_out0[i + 2];
-                f_b[8 * i + 2] <= f_out0[i + 6];
+                f_a[8 * i + 2] <= f_out0[bit_reversal(i + 2)];
+                f_b[8 * i + 2] <= f_out0[bit_reversal(i + 6)];
                 f_w[8 * i + 2] <= w_64[8];
 
-                f_a[8 * i + 3] <= f_out0[i + 3];
-                f_b[8 * i + 3] <= f_out0[i + 7];
+                f_a[8 * i + 3] <= f_out0[bit_reversal(i + 3)];
+                f_b[8 * i + 3] <= f_out0[bit_reversal(i + 7)];
                 f_w[8 * i + 3] <= w_64[12];
 
-                f_a[8 * i + 4] <= f_out1[i];
-                f_b[8 * i + 4] <= f_out1[i + 4];
+                f_a[8 * i + 4] <= f_out1[bit_reversal(i)];
+                f_b[8 * i + 4] <= f_out1[bit_reversal(i + 4)];
                 f_w[8 * i + 4] <= w_64[16];
 
-                f_a[8 * i + 5] <= f_out1[i + 1];
-                f_b[8 * i + 5] <= f_out1[i + 5];
+                f_a[8 * i + 5] <= f_out1[bit_reversal(i + 1)];
+                f_b[8 * i + 5] <= f_out1[bit_reversal(i + 5)];
                 f_w[8 * i + 5] <= w_64[20];
 
-                f_a[8 * i + 6] <= f_out1[i + 2];
-                f_b[8 * i + 6] <= f_out1[i + 6];
+                f_a[8 * i + 6] <= f_out1[bit_reversal(i + 2)];
+                f_b[8 * i + 6] <= f_out1[bit_reversal(i + 6)];
                 f_w[8 * i + 6] <= w_64[24];
 
-                f_a[8 * i + 7] <= f_out1[i + 3];
-                f_b[8 * i + 7] <= f_out1[i + 7];
+                f_a[8 * i + 7] <= f_out1[bit_reversal(i + 3)];
+                f_b[8 * i + 7] <= f_out1[bit_reversal(i + 7)];
                 f_w[8 * i + 7] <= w_64[28];
             end
 			for (int i = 0; i < 64; i++) begin
@@ -331,68 +331,68 @@ always_ff @(posedge clk) begin
 		end
 		STAGE5: begin
             for (int i = 0; i < 2; i++) begin
-                f_a[16 * i] <= f_out0[i];
-                f_b[16 * i] <= f_out0[i + 8];
+                f_a[16 * i] <= f_out0[bit_reversal(i)];
+                f_b[16 * i] <= f_out0[bit_reversal(i + 8)];
                 f_w[16 * i] <= w_64[0];
 
-                f_a[16 * i + 1] <= f_out0[i + 1];
-                f_b[16 * i + 1] <= f_out0[i + 9];
+                f_a[16 * i + 1] <= f_out0[bit_reversal(i + 1)];
+                f_b[16 * i + 1] <= f_out0[bit_reversal(i + 9)];
                 f_w[16 * i + 1] <= w_64[2];
 
-                f_a[16 * i + 2] <= f_out0[i + 2];
-                f_b[16 * i + 2] <= f_out0[i + 10];
+                f_a[16 * i + 2] <= f_out0[bit_reversal(i + 2)];
+                f_b[16 * i + 2] <= f_out0[bit_reversal(i + 10)];
                 f_w[16 * i + 2] <= w_64[4];
 
-                f_a[16 * i + 3] <= f_out0[i + 3];
-                f_b[16 * i + 3] <= f_out0[i + 11];
+                f_a[16 * i + 3] <= f_out0[bit_reversal(i + 3)];
+                f_b[16 * i + 3] <= f_out0[bit_reversal(i + 11)];
                 f_w[16 * i + 3] <= w_64[6];
 
-                f_a[16 * i + 4] <= f_out0[i + 4];
-                f_b[16 * i + 4] <= f_out0[i + 12];
+                f_a[16 * i + 4] <= f_out0[bit_reversal(i + 4)];
+                f_b[16 * i + 4] <= f_out0[bit_reversal(i + 12)];
                 f_w[16 * i + 4] <= w_64[8];
 
-                f_a[16 * i + 5] <= f_out0[i + 5];
-                f_b[16 * i + 5] <= f_out0[i + 13];
+                f_a[16 * i + 5] <= f_out0[bit_reversal(i + 5)];
+                f_b[16 * i + 5] <= f_out0[bit_reversal(i + 13)];
                 f_w[16 * i + 5] <= w_64[10];
 
-                f_a[16 * i + 6] <= f_out0[i + 6];
-                f_b[16 * i + 6] <= f_out0[i + 14];
+                f_a[16 * i + 6] <= f_out0[bit_reversal(i + 6)];
+                f_b[16 * i + 6] <= f_out0[bit_reversal(i + 14)];
                 f_w[16 * i + 6] <= w_64[12];
 
-                f_a[16 * i + 7] <= f_out0[i + 7];
-                f_b[16 * i + 7] <= f_out0[i + 15];
+                f_a[16 * i + 7] <= f_out0[bit_reversal(i + 7)];
+                f_b[16 * i + 7] <= f_out0[bit_reversal(i + 15)];
                 f_w[16 * i + 7] <= w_64[14];
 
-                f_a[16 * i + 8] <= f_out1[i];
-                f_b[16 * i + 8] <= f_out1[i + 8];
+                f_a[16 * i + 8] <= f_out1[bit_reversal(i)];
+                f_b[16 * i + 8] <= f_out1[bit_reversal(i + 8)];
                 f_w[16 * i + 8] <= w_64[16];
 
-                f_a[16 * i + 9] <= f_out1[i + 1];
-                f_b[16 * i + 9] <= f_out1[i + 9];
+                f_a[16 * i + 9] <= f_out1[bit_reversal(i + 1)];
+                f_b[16 * i + 9] <= f_out1[bit_reversal(i + 9)];
                 f_w[16 * i + 9] <= w_64[18];
 
-                f_a[16 * i + 10] <= f_out1[i + 2];
-                f_b[16 * i + 10] <= f_out1[i + 10];
+                f_a[16 * i + 10] <= f_out1[bit_reversal(i + 2)];
+                f_b[16 * i + 10] <= f_out1[bit_reversal(i + 10)];
                 f_w[16 * i + 10] <= w_64[20];
 
-                f_a[16 * i + 11] <= f_out1[i + 3];
-                f_b[16 * i + 11] <= f_out1[i + 11];
+                f_a[16 * i + 11] <= f_out1[bit_reversal(i + 3)];
+                f_b[16 * i + 11] <= f_out1[bit_reversal(i + 11)];
                 f_w[16 * i + 11] <= w_64[22];
 
-                f_a[16 * i + 12] <= f_out1[i + 4];
-                f_b[16 * i + 12] <= f_out1[i + 12];
+                f_a[16 * i + 12] <= f_out1[bit_reversal(i + 4)];
+                f_b[16 * i + 12] <= f_out1[bit_reversal(i + 12)];
                 f_w[16 * i + 12] <= w_64[24];
 
-                f_a[16 * i + 13] <= f_out1[i + 5];
-                f_b[16 * i + 13] <= f_out1[i + 13];
+                f_a[16 * i + 13] <= f_out1[bit_reversal(i + 5)];
+                f_b[16 * i + 13] <= f_out1[bit_reversal(i + 13)];
                 f_w[16 * i + 13] <= w_64[26];
 
-                f_a[16 * i + 14] <= f_out1[i + 6];
-                f_b[16 * i + 14] <= f_out1[i + 14];
+                f_a[16 * i + 14] <= f_out1[bit_reversal(i + 6)];
+                f_b[16 * i + 14] <= f_out1[bit_reversal(i + 14)];
                 f_w[16 * i + 14] <= w_64[28];
 
-                f_a[16 * i + 15] <= f_out1[i + 7];
-                f_b[16 * i + 15] <= f_out1[i + 15];
+                f_a[16 * i + 15] <= f_out1[bit_reversal(i + 7)];
+                f_b[16 * i + 15] <= f_out1[bit_reversal(i + 15)];
                 f_w[16 * i + 15] <= w_64[30];
             end
                 
@@ -403,132 +403,132 @@ always_ff @(posedge clk) begin
 		end
 		STAGE6: begin
             for (int i = 0; i < 1; i++) begin
-                f_a[32 * i] <= f_out0[i];
-                f_b[32 * i] <= f_out0[i + 16];
+                f_a[32 * i] <= f_out0[bit_reversal(i)];
+                f_b[32 * i] <= f_out0[bit_reversal(i + 16)];
                 f_w[32 * i] <= w_64[0];
 
-                f_a[32 * i + 1] <= f_out0[i + 1];
-                f_b[32 * i + 1] <= f_out0[i + 17];
+                f_a[32 * i + 1] <= f_out0[bit_reversal(i + 1)];
+                f_b[32 * i + 1] <= f_out0[bit_reversal(i + 17)];
                 f_w[32 * i + 1] <= w_64[1];
 
-                f_a[32 * i + 2] <= f_out0[i + 2];
-                f_b[32 * i + 2] <= f_out0[i + 18];
+                f_a[32 * i + 2] <= f_out0[bit_reversal(i + 2)];
+                f_b[32 * i + 2] <= f_out0[bit_reversal(i + 18)];
                 f_w[32 * i + 2] <= w_64[2];
 
-                f_a[32 * i + 3] <= f_out0[i + 3];
-                f_b[32 * i + 3] <= f_out0[i + 19];
+                f_a[32 * i + 3] <= f_out0[bit_reversal(i + 3)];
+                f_b[32 * i + 3] <= f_out0[bit_reversal(i + 19)];
                 f_w[32 * i + 3] <= w_64[3];
 
-                f_a[32 * i + 4] <= f_out0[i + 4];
-                f_b[32 * i + 4] <= f_out0[i + 20];
+                f_a[32 * i + 4] <= f_out0[bit_reversal(i + 4)];
+                f_b[32 * i + 4] <= f_out0[bit_reversal(i + 20)];
                 f_w[32 * i + 4] <= w_64[4];
 
-                f_a[32 * i + 5] <= f_out0[i + 5];
-                f_b[32 * i + 5] <= f_out0[i + 21];
+                f_a[32 * i + 5] <= f_out0[bit_reversal(i + 5)];
+                f_b[32 * i + 5] <= f_out0[bit_reversal(i + 21)];
                 f_w[32 * i + 5] <= w_64[5];
 
-                f_a[32 * i + 6] <= f_out0[i + 6];
-                f_b[32 * i + 6] <= f_out0[i + 22];
+                f_a[32 * i + 6] <= f_out0[bit_reversal(i + 6)];
+                f_b[32 * i + 6] <= f_out0[bit_reversal(i + 22)];
                 f_w[32 * i + 6] <= w_64[6];
 
-                f_a[32 * i + 7] <= f_out0[i + 7];
-                f_b[32 * i + 7] <= f_out0[i + 23];
+                f_a[32 * i + 7] <= f_out0[bit_reversal(i + 7)];
+                f_b[32 * i + 7] <= f_out0[bit_reversal(i + 23)];
                 f_w[32 * i + 7] <= w_64[7];
 
-                f_a[32 * i + 8] <= f_out0[i + 8];
-                f_b[32 * i + 8] <= f_out0[i + 24];
+                f_a[32 * i + 8] <= f_out0[bit_reversal(i + 8)];
+                f_b[32 * i + 8] <= f_out0[bit_reversal(i + 24)];
                 f_w[32 * i + 8] <= w_64[8];
 
-                f_a[32 * i + 9] <= f_out0[i + 9];
-                f_b[32 * i + 9] <= f_out0[i + 25];
+                f_a[32 * i + 9] <= f_out0[bit_reversal(i + 9)];
+                f_b[32 * i + 9] <= f_out0[bit_reversal(i + 25)];
                 f_w[32 * i + 9] <= w_64[9];
 
-                f_a[32 * i + 10] <= f_out0[i + 10];
-                f_b[32 * i + 10] <= f_out0[i + 26];
+                f_a[32 * i + 10] <= f_out0[bit_reversal(i + 10)];
+                f_b[32 * i + 10] <= f_out0[bit_reversal(i + 26)];
                 f_w[32 * i + 10] <= w_64[10];
 
-                f_a[32 * i + 11] <= f_out0[i + 11];
-                f_b[32 * i + 11] <= f_out0[i + 27];
+                f_a[32 * i + 11] <= f_out0[bit_reversal(i + 11)];
+                f_b[32 * i + 11] <= f_out0[bit_reversal(i + 27)];
                 f_w[32 * i + 11] <= w_64[11];
 
-                f_a[32 * i + 12] <= f_out0[i + 12];
-                f_b[32 * i + 12] <= f_out0[i + 28];
+                f_a[32 * i + 12] <= f_out0[bit_reversal(i + 12)];
+                f_b[32 * i + 12] <= f_out0[bit_reversal(i + 28)];
                 f_w[32 * i + 12] <= w_64[12];
 
-                f_a[32 * i + 13] <= f_out0[i + 13];
-                f_b[32 * i + 13] <= f_out0[i + 29];
+                f_a[32 * i + 13] <= f_out0[bit_reversal(i + 13)];
+                f_b[32 * i + 13] <= f_out0[bit_reversal(i + 29)];
                 f_w[32 * i + 13] <= w_64[13];
 
-                f_a[32 * i + 14] <= f_out0[i + 14];
-                f_b[32 * i + 14] <= f_out0[i + 30];
+                f_a[32 * i + 14] <= f_out0[bit_reversal(i + 14)];
+                f_b[32 * i + 14] <= f_out0[bit_reversal(i + 30)];
                 f_w[32 * i + 14] <= w_64[14];
 
-                f_a[32 * i + 15] <= f_out0[i + 15];
-                f_b[32 * i + 15] <= f_out0[i + 31];
+                f_a[32 * i + 15] <= f_out0[bit_reversal(i + 15)];
+                f_b[32 * i + 15] <= f_out0[bit_reversal(i + 31)];
                 f_w[32 * i + 15] <= w_64[15];
 
-                f_a[32 * i + 16] <= f_out1[i];
-                f_b[32 * i + 16] <= f_out1[i + 16];
+                f_a[32 * i + 16] <= f_out1[bit_reversal(i)];
+                f_b[32 * i + 16] <= f_out1[bit_reversal(i + 16)];
                 f_w[32 * i + 16] <= w_64[16];
 
-                f_a[32 * i + 17] <= f_out1[i + 1];
-                f_b[32 * i + 17] <= f_out1[i + 17];
+                f_a[32 * i + 17] <= f_out1[bit_reversal(i + 1)];
+                f_b[32 * i + 17] <= f_out1[bit_reversal(i + 17)];
                 f_w[32 * i + 17] <= w_64[17];
 
-                f_a[32 * i + 18] <= f_out1[i + 2];
-                f_b[32 * i + 18] <= f_out1[i + 18];
+                f_a[32 * i + 18] <= f_out1[bit_reversal(i + 2)];
+                f_b[32 * i + 18] <= f_out1[bit_reversal(i + 18)];
                 f_w[32 * i + 18] <= w_64[18];
 
-                f_a[32 * i + 19] <= f_out1[i + 3];
-                f_b[32 * i + 19] <= f_out1[i + 19];
+                f_a[32 * i + 19] <= f_out1[bit_reversal(i + 3)];
+                f_b[32 * i + 19] <= f_out1[bit_reversal(i + 19)];
                 f_w[32 * i + 19] <= w_64[19];
 
-                f_a[32 * i + 20] <= f_out1[i + 4];
-                f_b[32 * i + 20] <= f_out1[i + 20];
+                f_a[32 * i + 20] <= f_out1[bit_reversal(i + 4)];
+                f_b[32 * i + 20] <= f_out1[bit_reversal(i + 20)];
                 f_w[32 * i + 20] <= w_64[20];
 
-                f_a[32 * i + 21] <= f_out1[i + 5];
-                f_b[32 * i + 21] <= f_out1[i + 21];
+                f_a[32 * i + 21] <= f_out1[bit_reversal(i + 5)];
+                f_b[32 * i + 21] <= f_out1[bit_reversal(i + 21)];
                 f_w[32 * i + 21] <= w_64[21];
 
-                f_a[32 * i + 22] <= f_out1[i + 6];
-                f_b[32 * i + 22] <= f_out1[i + 22];
+                f_a[32 * i + 22] <= f_out1[bit_reversal(i + 6)];
+                f_b[32 * i + 22] <= f_out1[bit_reversal(i + 22)];
                 f_w[32 * i + 22] <= w_64[22];
 
-                f_a[32 * i + 23] <= f_out1[i + 7];
-                f_b[32 * i + 23] <= f_out1[i + 23];
+                f_a[32 * i + 23] <= f_out1[bit_reversal(i + 7)];
+                f_b[32 * i + 23] <= f_out1[bit_reversal(i + 23)];
                 f_w[32 * i + 23] <= w_64[23];
 
-                f_a[32 * i + 24] <= f_out1[i + 8];
-                f_b[32 * i + 24] <= f_out1[i + 24];
+                f_a[32 * i + 24] <= f_out1[bit_reversal(i + 8)];
+                f_b[32 * i + 24] <= f_out1[bit_reversal(i + 24)];
                 f_w[32 * i + 24] <= w_64[24];
 
-                f_a[32 * i + 25] <= f_out1[i + 9];
-                f_b[32 * i + 25] <= f_out1[i + 25];
+                f_a[32 * i + 25] <= f_out1[bit_reversal(i + 9)];
+                f_b[32 * i + 25] <= f_out1[bit_reversal(i + 25)];
                 f_w[32 * i + 25] <= w_64[25];
 
-                f_a[32 * i + 26] <= f_out1[i + 10];
-                f_b[32 * i + 26] <= f_out1[i + 26];
+                f_a[32 * i + 26] <= f_out1[bit_reversal(i + 10)];
+                f_b[32 * i + 26] <= f_out1[bit_reversal(i + 26)];
                 f_w[32 * i + 26] <= w_64[26];
 
-                f_a[32 * i + 27] <= f_out1[i + 11];
-                f_b[32 * i + 27] <= f_out1[i + 27];
+                f_a[32 * i + 27] <= f_out1[bit_reversal(i + 11)];
+                f_b[32 * i + 27] <= f_out1[bit_reversal(i + 27)];
                 f_w[32 * i + 27] <= w_64[27];
 
-                f_a[32 * i + 28] <= f_out1[i + 12];
-                f_b[32 * i + 28] <= f_out1[i + 28];
+                f_a[32 * i + 28] <= f_out1[bit_reversal(i + 12)];
+                f_b[32 * i + 28] <= f_out1[bit_reversal(i + 28)];
                 f_w[32 * i + 28] <= w_64[28];
 
-                f_a[32 * i + 29] <= f_out1[i + 13];
-                f_b[32 * i + 29] <= f_out1[i + 29];
+                f_a[32 * i + 29] <= f_out1[bit_reversal(i + 13)];
+                f_b[32 * i + 29] <= f_out1[bit_reversal(i + 29)];
                 f_w[32 * i + 29] <= w_64[29];
 
-                f_a[32 * i + 30] <= f_out1[i + 14];
-                f_b[32 * i + 30] <= f_out1[i + 30];
+                f_a[32 * i + 30] <= f_out1[bit_reversal(i + 14)];
+                f_b[32 * i + 30] <= f_out1[bit_reversal(i + 30)];
                 f_w[32 * i + 30] <= w_64[30];
 
-                f_a[32 * i + 31] <= f_out1[i + 15];
-                f_b[32 * i + 31] <= f_out1[i + 31];
+                f_a[32 * i + 31] <= f_out1[bit_reversal(i + 15)];
+                f_b[32 * i + 31] <= f_out1[bit_reversal(i + 31)];
                 f_w[32 * i + 31] <= w_64[31];
             end
 
