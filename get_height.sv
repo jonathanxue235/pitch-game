@@ -2,7 +2,7 @@ module get_height (
     input logic clk,
 	 input logic mic_clk,
     input logic reset,
-    input logic [11:0] mic_data,
+    //input logic [11:0] mic_data,
     output logic [9:0] height
 );
 
@@ -11,7 +11,7 @@ logic [31:0] fft_out [63:0];
 logic start;
 //logic [31:0] mic_data_shift [63:0];
 logic [15:0] mic_data_shift [63:0];
-//logic [11:0] mic_data;
+logic [11:0] mic_data;
 logic resetNot;
 assign resetNot = ~reset;
 fft_16 fft_inst (
@@ -35,7 +35,7 @@ logic [11:0] mic_data6;
 logic [11:0] mic_data7;
 logic [11:0] mic_data8;
 
-/*
+
 mic mic_inst (
     // Inputs
     .CLOCK(mic_clk),
@@ -51,7 +51,7 @@ mic mic_inst (
 	 .CH6(mic_data7),
 	 .CH7(mic_data8),
 );
-*/
+
 
 
 
@@ -65,7 +65,7 @@ always_ff @(posedge clk) begin
     end
     else begin
         count <= count + 1;
-        if (count >= 50000 - 1) begin
+        if (count >= 12500 - 1) begin
             count <= 32'd0;
             fetch_data <= 1;
         end
@@ -85,7 +85,8 @@ always_ff @(posedge clk) begin
         num_samples <= 9'd0;
     end else begin
         if (fetch_data) begin
-				mic_data_shift[0] <= {mic_data[11:4], 8'b0};
+				//mic_data_shift[0] <= {4'b0, mic_data, 16'b0};
+				mic_data_shift[0] <= {1'b0, mic_data[11:5], 8'b0};
 				mic_data_shift[63:1] <= mic_data_shift[62:0];
             if (num_samples < 8'd64) begin
                 num_samples <= num_samples + 1;

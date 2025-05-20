@@ -2,7 +2,7 @@
 *
 * TODO: This could be implemented better and more cleanly
 */
-module fft (
+module fft_16 (
     input clk,
     input reset,
     input start,

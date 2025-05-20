@@ -1,8 +1,16 @@
 <sld_project_info>
   <project>
-    <hash md5_digest_80b="2d7088fc1a4d1b28f0e3"/>
+    <hash md5_digest_80b="4991fe0d29eebef4d2ed"/>
   </project>
   <file_info>
     <file device="10M50DAF484C7G" path="pitch_game_top.sof" usercode="0xFFFFFFFF"/>
   </file_info>
+  <sld_infos>
+    <sld_info hpath="get_height:get_height_inst|mic:mic_inst" name="mic_inst">
+      <assignment_values>
+        <assignment_value text="QSYS_NAME mic HAS_SOPCINFO 1 GENERATION_ID 1747027210"/>
+      </assignment_values>
+      <parameters/>
+    </sld_info>
+  </sld_infos>
 </sld_project_info>

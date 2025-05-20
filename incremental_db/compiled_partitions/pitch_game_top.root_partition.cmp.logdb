@@ -1,1 +1,3 @@
 v1
+PORT_SWAPPING,PORT_SWAP_TYPE_DSPMULT,get_height:get_height_inst|fft_16:fft_inst|butterfly:fft16|lpm_mult:Mult1|mult_tds:auto_generated|mac_mult1,
+PORT_SWAPPING,PORT_SWAP_TYPE_DSPMULT,get_height:get_height_inst|fft_16:fft_inst|butterfly:fft16|lpm_mult:Mult2|mult_tds:auto_generated|mac_mult1,
