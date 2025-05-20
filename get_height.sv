@@ -9,11 +9,12 @@ module get_height (
 logic status;
 logic [31:0] fft_out [63:0];
 logic start;
-logic [31:0] mic_data_shift [63:0];
+//logic [31:0] mic_data_shift [63:0];
+logic [15:0] mic_data_shift [63:0];
 //logic [11:0] mic_data;
 logic resetNot;
 assign resetNot = ~reset;
-fft fft_inst (
+fft_16 fft_inst (
     // Input
     .clk(clk),
     .reset(reset),
@@ -84,7 +85,7 @@ always_ff @(posedge clk) begin
         num_samples <= 9'd0;
     end else begin
         if (fetch_data) begin
-				mic_data_shift[0] <= {4'b0, mic_data, 16'b0};
+				mic_data_shift[0] <= {mic_data[11:4], 8'b0};
 				mic_data_shift[63:1] <= mic_data_shift[62:0];
             if (num_samples < 8'd64) begin
                 num_samples <= num_samples + 1;
