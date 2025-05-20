@@ -65,7 +65,7 @@ always_ff @(posedge clk) begin
     end
     else begin
         count <= count + 1;
-        if (count >= 12500 - 1) begin
+        if (count >= 50000 - 1) begin
             count <= 32'd0;
             fetch_data <= 1;
         end
@@ -113,19 +113,29 @@ always_comb begin
     end
 end
 
+logic [9:0] height_history [15:0];
+logic [13:0] sum_of_heights;
+
 logic prev_status;
 always_ff @(posedge clk) begin
-    if (status) begin
-        prev_status <= 1;
-    end
-    else begin
+    if (reset) begin
         prev_status <= 0;
+    end else begin
+        prev_status <= status;
     end
 end
 
 always_ff @(posedge clk) begin
-    if (status) begin
-        height <= new_height;
+    if (reset) begin
+        height_history <= '{default: 0};
+        sum_of_heights <= 0;
+        height <= 0;
+    end else if (status) begin
+        sum_of_heights <= sum_of_heights - height_history[15] + new_height;
+
+        height_history <= {new_height, height_history[0:14]};
+
+        height <= sum_of_heights >> 4;
     end
 end
 
