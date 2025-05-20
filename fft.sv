@@ -15,6 +15,16 @@ module fft (
     output logic status
 );
 
+/*
+always_comb begin
+	for (int i = 0; i < 64; i++) begin
+		out[i] = in[i];
+	end
+end
+assign status = start;
+*/
+
+
 logic [31:0] f_a [31:0];
 logic [31:0] f_b [31:0];
 logic [31:0] f_w [31:0];
@@ -22,72 +32,76 @@ logic [31:0] f_out0 [31:0];
 logic [31:0] f_out1 [31:0];
 
 logic [31:0] in_reorder [63:0];
-always_comb begin
-    in_reorder[0] = in[0];
-    in_reorder[1] = in[32];
-    in_reorder[2] = in[16];
-    in_reorder[3] = in[48];
-    in_reorder[4] = in[8];
-    in_reorder[5] = in[40];
-    in_reorder[6] = in[24];
-    in_reorder[7] = in[56];
-    in_reorder[8] = in[4];
-    in_reorder[9] = in[36];
-    in_reorder[10] = in[20];
-    in_reorder[11] = in[52];
-    in_reorder[12] = in[12];
-    in_reorder[13] = in[44];
-    in_reorder[14] = in[28];
-    in_reorder[15] = in[60];
-    in_reorder[16] = in[2];
-    in_reorder[17] = in[34];
-    in_reorder[18] = in[18];
-    in_reorder[19] = in[50];
-    in_reorder[20] = in[10];
-    in_reorder[21] = in[42];
-    in_reorder[22] = in[26];
-    in_reorder[23] = in[58];
-    in_reorder[24] = in[6];
-    in_reorder[25] = in[38];
-    in_reorder[26] = in[22];
-    in_reorder[27] = in[54];
-    in_reorder[28] = in[14];
-    in_reorder[29] = in[46];
-    in_reorder[30] = in[30];
-    in_reorder[31] = in[62];
-    in_reorder[32] = in[1];
-    in_reorder[33] = in[33];
-    in_reorder[34] = in[17];
-    in_reorder[35] = in[49];
-    in_reorder[36] = in[9];
-    in_reorder[37] = in[41];
-    in_reorder[38] = in[25];
-    in_reorder[39] = in[57];
-    in_reorder[40] = in[5];
-    in_reorder[41] = in[37];
-    in_reorder[42] = in[21];
-    in_reorder[43] = in[53];
-    in_reorder[44] = in[13];
-    in_reorder[45] = in[45];
-    in_reorder[46] = in[29];
-    in_reorder[47] = in[61];
-    in_reorder[48] = in[3];
-    in_reorder[49] = in[35];
-    in_reorder[50] = in[19];
-    in_reorder[51] = in[51];
-    in_reorder[52] = in[11];
-    in_reorder[53] = in[43];
-    in_reorder[54] = in[27];
-    in_reorder[55] = in[59];
-    in_reorder[56] = in[7];
-    in_reorder[57] = in[39];
-    in_reorder[58] = in[23];
-    in_reorder[59] = in[55];
-    in_reorder[60] = in[15];
-    in_reorder[61] = in[47];
-    in_reorder[62] = in[31];
-    in_reorder[63] = in[63];
+/*
+always_ff @(posedge clk) begin
+	if (start) begin
+    in_reorder[0] <= in[0];
+    in_reorder[1] <= in[32];
+    in_reorder[2] <= in[16];
+    in_reorder[3] <= in[48];
+    in_reorder[4] <= in[8];
+    in_reorder[5] <= in[40];
+    in_reorder[6] <= in[24];
+    in_reorder[7] <= in[56];
+    in_reorder[8] <= in[4];
+    in_reorder[9] <= in[36];
+    in_reorder[10] <= in[20];
+    in_reorder[11] <= in[52];
+    in_reorder[12] <= in[12];
+    in_reorder[13] <= in[44];
+    in_reorder[14] <= in[28];
+    in_reorder[15] <= in[60];
+    in_reorder[16] <= in[2];
+    in_reorder[17] <= in[34];
+    in_reorder[18] <= in[18];
+    in_reorder[19] <= in[50];
+    in_reorder[20] <= in[10];
+    in_reorder[21] <= in[42];
+    in_reorder[22] <= in[26];
+    in_reorder[23] <= in[58];
+    in_reorder[24] <= in[6];
+    in_reorder[25] <= in[38];
+    in_reorder[26] <= in[22];
+    in_reorder[27] <= in[54];
+    in_reorder[28] <= in[14];
+    in_reorder[29] <= in[46];
+    in_reorder[30] <= in[30];
+    in_reorder[31] <= in[62];
+    in_reorder[32] <= in[1];
+    in_reorder[33] <= in[33];
+    in_reorder[34] <= in[17];
+    in_reorder[35] <= in[49];
+    in_reorder[36] <= in[9];
+    in_reorder[37] <= in[41];
+    in_reorder[38] <= in[25];
+    in_reorder[39] <= in[57];
+    in_reorder[40] <= in[5];
+    in_reorder[41] <= in[37];
+    in_reorder[42] <= in[21];
+    in_reorder[43] <= in[53];
+    in_reorder[44] <= in[13];
+    in_reorder[45] <= in[45];
+    in_reorder[46] <= in[29];
+    in_reorder[47] <= in[61];
+    in_reorder[48] <= in[3];
+    in_reorder[49] <= in[35];
+    in_reorder[50] <= in[19];
+    in_reorder[51] <= in[51];
+    in_reorder[52] <= in[11];
+    in_reorder[53] <= in[43];
+    in_reorder[54] <= in[27];
+    in_reorder[55] <= in[59];
+    in_reorder[56] <= in[7];
+    in_reorder[57] <= in[39];
+    in_reorder[58] <= in[23];
+    in_reorder[59] <= in[55];
+    in_reorder[60] <= in[15];
+    in_reorder[61] <= in[47];
+    in_reorder[62] <= in[31];
+    in_reorder[63] <= in[63];
+	 end
 end
+*/
 
 butterfly fft0(.A(f_a[0]), .B(f_b[0]), .W(f_w[0]), .out0(f_out0[0]), .out1(f_out1[0]));
 butterfly fft1(.A(f_a[1]), .B(f_b[1]), .W(f_w[1]), .out0(f_out0[1]), .out1(f_out1[1]));
@@ -122,9 +136,10 @@ butterfly fft29(.A(f_a[29]), .B(f_b[29]), .W(f_w[29]), .out0(f_out0[29]), .out1(
 butterfly fft30(.A(f_a[30]), .B(f_b[30]), .W(f_w[30]), .out0(f_out0[30]), .out1(f_out1[30]));
 butterfly fft31(.A(f_a[31]), .B(f_b[31]), .W(f_w[31]), .out0(f_out0[31]), .out1(f_out1[31]));
 
-
+/*
 logic [31:0] w_64 [31:0];
-always_comb begin
+
+initial begin
     w_64[0] = {16'sb0111111111111111, 16'sb0000000000000000}; // R: 32767 (orig: 1), I: 0 (orig: 0)
     w_64[1] = {16'sb0111111101100010, 16'sb1111001101110100}; // R: 32610 (orig: cos(pi/32)), I: -3212 (orig: -sin(pi/32))
     w_64[2] = {16'sb0111110110011011, 16'sb1110100100000111}; // R: 32139 (orig: cos(pi/16)), I: -6393 (orig: -sin(pi/16))
@@ -158,19 +173,60 @@ always_comb begin
     w_64[30] = {16'sb1000001001110101, 16'sb1110100100000111}; // R: -32139 (orig: cos(15*pi/16)), I: -6393 (orig: -sin(15*pi/16))
     w_64[31] = {16'sb1111111010011110, 16'sb1111001101110100}; // R: -32610 (orig: cos(31*pi/32)), I: -3212 (orig: -sin(31*pi/32))
 end
-
+*/
+parameter logic [31:0] w_64 [0:31] = '{ // Array literal assignment
+    {16'sh7FFF, 16'sh0000}, // w_64[0]:  R: 32767 (1.0), I: 0
+    {16'sh7F62, 16'shF374}, // w_64[1]:  R: 32610, I: -3212
+    {16'sh7D9B, 16'shE907}, // w_64[2]:  R: 32139, I: -6393
+    {16'sh7A7D, 16'shDAC8}, // w_64[3]:  R: 31357, I: -9512
+    {16'sh7641, 16'shCE01}, // w_64[4]:  R: 30273, I: -12543
+    {16'sh70E3, 16'shC398}, // w_64[5]:  R: 28899, I: -15464
+    {16'sh6A6D, 16'shB8E4}, // w_64[6]:  R: 27245, I: -18204
+    {16'sh62F2, 16'shADCC}, // w_64[7]:  R: 25330, I: -20788
+    {16'sh5A82, 16'shA57E}, // w_64[8]:  R: 23170, I: -23170 (sqrt(2)/2)
+    {16'sh5134, 16'sh9D0E}, // w_64[9]:  R: 20788, I: -25330
+    {16'sh471C, 16'sh9593}, // w_64[10]: R: 18204, I: -27245
+    {16'sh3C68, 16'sh8F1D}, // w_64[11]: R: 15464, I: -28899
+    {16'sh30FF, 16'sh89BF}, // w_64[12]: R: 12543, I: -30273
+    {16'sh2528, 16'sh8583}, // w_64[13]: R: 9512,  I: -31357
+    {16'sh18F9, 16'sh8275}, // w_64[14]: R: 6393,  I: -32139
+    {16'sh0C8C, 16'shFE9E}, // w_64[15]: R: 3212,  I: -32610
+    {16'sh0000, 16'sh8000}, // w_64[16]: R: 0,     I: -32768 (-1.0)
+    {16'shF374, 16'shFE9E}, // w_64[17]: R: -3212, I: -32610
+    {16'shE907, 16'sh8275}, // w_64[18]: R: -6393, I: -32139
+    {16'shDAC8, 16'sh8583}, // w_64[19]: R: -9512, I: -31357
+    {16'shCE01, 16'sh89BF}, // w_64[20]: R: -12543,I: -30273
+    {16'shC398, 16'sh8F1D}, // w_64[21]: R: -15464,I: -28899
+    {16'shB8E4, 16'sh9593}, // w_64[22]: R: -18204,I: -27245
+    {16'shADCC, 16'sh9D0E}, // w_64[23]: R: -20788,I: -25330
+    {16'shA57E, 16'shA57E}, // w_64[24]: R: -23170,I: -23170 (-sqrt(2)/2)
+    {16'sh9D0E, 16'shADCC}, // w_64[25]: R: -25330,I: -20788
+    {16'sh9593, 16'shB8E4}, // w_64[26]: R: -27245,I: -18204
+    {16'sh8F1D, 16'shC398}, // w_64[27]: R: -28899,I: -15464
+    {16'sh89BF, 16'shCE01}, // w_64[28]: R: -30273,I: -12543
+    {16'sh8583, 16'shDAC8}, // w_64[29]: R: -31357,I: -9512
+    {16'sh8275, 16'shE907}, // w_64[30]: R: -32139,I: -6393
+    {16'shFE9E, 16'shF374}  // w_64[31]: R: -32610,I: -3212
+};
 typedef enum logic [2:0] {RESET, STAGE1, STAGE2, STAGE3, STAGE4, STAGE5, STAGE6, DONE} State;
 
 State curr, next;
 
+function [5:0] bit_reversal (input [5:0] in_val);
 
+	bit_reversal[0] = in_val[5];
+	bit_reversal[1] = in_val[4];
+	bit_reversal[2] = in_val[3];
+	bit_reversal[3] = in_val[2];
+	bit_reversal[4] = in_val[1];
+	bit_reversal[5] = in_val[0];
+	
+endfunction
 always_ff @(posedge clk) begin
     if (reset)
         curr <= RESET;
     else
         curr <= next;
-    
-
     
 	case (curr)
 		RESET: begin
@@ -186,8 +242,9 @@ always_ff @(posedge clk) begin
 		end
 		STAGE1: begin
             for (int i = 0; i < 32; i++) begin
-                f_a[i] <= in_reorder[2 * i];
-                f_b[i] <= in_reorder[2 * i + 1];
+					 
+                f_a[i] <= in[bit_reversal(2 * i)];
+                f_b[i] <= in[2 * i + 1];
                 f_w[i] <= w_64[0];
             end
             for (int i = 0; i < 64; i++) begin
@@ -527,12 +584,15 @@ always_comb begin
 			next = DONE;
 		end
 		DONE: begin
-			next = DONE;
+			if (start) next = STAGE1;
+			else next = DONE;
 		end
 		default: begin
 			next = RESET;
 		end
 	endcase
 end
+
+
 
 endmodule

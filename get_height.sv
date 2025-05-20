@@ -1,5 +1,6 @@
 module get_height (
     input logic clk,
+	 input logic mic_clk,
     input logic reset,
     input logic [11:0] mic_data,
     output logic [9:0] height
@@ -10,6 +11,8 @@ logic [31:0] fft_out [63:0];
 logic start;
 logic [31:0] mic_data_shift [63:0];
 //logic [11:0] mic_data;
+logic resetNot;
+assign resetNot = ~reset;
 fft fft_inst (
     // Input
     .clk(clk),
@@ -22,16 +25,35 @@ fft fft_inst (
     .status(status)
 );
 
+
+logic [11:0] mic_data2;
+logic [11:0] mic_data3;
+logic [11:0] mic_data4;
+logic [11:0] mic_data5;
+logic [11:0] mic_data6;
+logic [11:0] mic_data7;
+logic [11:0] mic_data8;
+
 /*
 mic mic_inst (
     // Inputs
-    .CLOCK(clk),
-    .RESET(~reset),
+    .CLOCK(mic_clk),
+    .RESET(reset),
 
     // Outputs
-    .CH0(mic_data)
+    .CH0(mic_data),
+	 .CH1(mic_data2),
+	 .CH2(mic_data3),
+	 .CH3(mic_data4),
+	 .CH4(mic_data5),
+	 .CH5(mic_data6),
+	 .CH6(mic_data7),
+	 .CH7(mic_data8),
 );
 */
+
+
+
 
 logic [31:0] count;
 logic fetch_data;
@@ -79,12 +101,12 @@ end
 logic [9:0] new_height;
 logic [31:0] curr_max;
 always_comb begin
-    curr_max = fft_out[0];
-    new_height = 10'd16;
+    curr_max = fft_out[63];
+    new_height = 10'd50;
     for (int i = 0; i < 64; i++) begin
-        if (fft_out[i] > curr_max) begin
-            curr_max = fft_out[i];
-            new_height = 7 * i + 16;
+        if (fft_out[63 - i] > curr_max) begin
+            curr_max = fft_out[63 - i];
+            new_height = 5 * i + 16;
         end
     end
 end
@@ -100,7 +122,7 @@ always_ff @(posedge clk) begin
 end
 
 always_ff @(posedge clk) begin
-    if (prev_status) begin
+    if (status) begin
         height <= new_height;
     end
 end

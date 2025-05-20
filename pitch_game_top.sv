@@ -1,8 +1,9 @@
 module pitch_game_top (
     input logic clk,
+	 input logic mic_clk,
     input logic resetNot,
+	 
     input logic start_button_not,
-    input logic [11:0] mic_in,
 
 
      // output horizontal and vertical counters for communication with graphics module
@@ -30,9 +31,6 @@ logic reset;
 logic start_button;
 assign start_button = ~start_button_not;
 assign reset = ~resetNot;
-always_ff @(posedge enable) begin
-	led <= ~led;
-end
 
 logic [9:0] bird_x;
 assign bird_x = 100;
@@ -74,13 +72,12 @@ clock_divider mic_sample(
 );
 
 
-
-
 get_height get_height_inst (
     // Input
     .clk(clk),
+	 .mic_clk(mic_clk),
     .reset(reset),
-    .mic_data(mic_data),
+    //.mic_data(mic_data),
 
     // Output
     .height(bird_y)

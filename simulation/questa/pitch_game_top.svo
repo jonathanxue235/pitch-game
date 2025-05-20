@@ -17,7 +17,7 @@
 // PROGRAM "Quartus Prime"
 // VERSION "Version 23.1std.1 Build 993 05/14/2024 SC Lite Edition"
 
-// DATE "05/14/2025 21:50:58"
+// DATE "05/20/2025 09:19:31"
 
 // 
 // Device: Altera 10M50DAF484C7G Package FBGA484
@@ -31,35 +31,38 @@
 
 module get_height_tb (
 	clk,
+	mic_clk,
 	reset,
 	mic_data,
 	height);
-output 	logic clk ;
-output 	logic reset ;
-output 	logic [11:0] mic_data ;
-output 	logic [9:0] height ;
+output 	clk;
+output 	mic_clk;
+output 	reset;
+output 	[11:0] mic_data;
+output 	[9:0] height;
 
 // Design Ports Information
 // clk	=>  Location: PIN_N14,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// mic_clk	=>  Location: PIN_N5,	 I/O Standard: 2.5 V,	 Current Strength: Default
 // reset	=>  Location: PIN_AB2,	 I/O Standard: 2.5 V,	 Current Strength: Default
-// mic_data[0]	=>  Location: PIN_T2,	 I/O Standard: 2.5 V,	 Current Strength: Default
-// mic_data[1]	=>  Location: PIN_P14,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// mic_data[0]	=>  Location: PIN_T1,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// mic_data[1]	=>  Location: PIN_N22,	 I/O Standard: 2.5 V,	 Current Strength: Default
 // mic_data[2]	=>  Location: PIN_AA15,	 I/O Standard: 2.5 V,	 Current Strength: Default
 // mic_data[3]	=>  Location: PIN_AA8,	 I/O Standard: 2.5 V,	 Current Strength: Default
-// mic_data[4]	=>  Location: PIN_AB21,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// mic_data[4]	=>  Location: PIN_AA20,	 I/O Standard: 2.5 V,	 Current Strength: Default
 // mic_data[5]	=>  Location: PIN_D13,	 I/O Standard: 2.5 V,	 Current Strength: Default
-// mic_data[6]	=>  Location: PIN_P18,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// mic_data[6]	=>  Location: PIN_R18,	 I/O Standard: 2.5 V,	 Current Strength: Default
 // mic_data[7]	=>  Location: PIN_C9,	 I/O Standard: 2.5 V,	 Current Strength: Default
 // mic_data[8]	=>  Location: PIN_M20,	 I/O Standard: 2.5 V,	 Current Strength: Default
 // mic_data[9]	=>  Location: PIN_P13,	 I/O Standard: 2.5 V,	 Current Strength: Default
-// mic_data[10]	=>  Location: PIN_K8,	 I/O Standard: 2.5 V,	 Current Strength: Default
-// mic_data[11]	=>  Location: PIN_P1,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// mic_data[10]	=>  Location: PIN_K9,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// mic_data[11]	=>  Location: PIN_A13,	 I/O Standard: 2.5 V,	 Current Strength: Default
 // height[0]	=>  Location: PIN_L9,	 I/O Standard: 2.5 V,	 Current Strength: Default
 // height[1]	=>  Location: PIN_W3,	 I/O Standard: 2.5 V,	 Current Strength: Default
 // height[2]	=>  Location: PIN_K1,	 I/O Standard: 2.5 V,	 Current Strength: Default
-// height[3]	=>  Location: PIN_AB18,	 I/O Standard: 2.5 V,	 Current Strength: Default
-// height[4]	=>  Location: PIN_AB9,	 I/O Standard: 2.5 V,	 Current Strength: Default
-// height[5]	=>  Location: PIN_U21,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// height[3]	=>  Location: PIN_J18,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// height[4]	=>  Location: PIN_U19,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// height[5]	=>  Location: PIN_U22,	 I/O Standard: 2.5 V,	 Current Strength: Default
 // height[6]	=>  Location: PIN_F19,	 I/O Standard: 2.5 V,	 Current Strength: Default
 // height[7]	=>  Location: PIN_V21,	 I/O Standard: 2.5 V,	 Current Strength: Default
 // height[8]	=>  Location: PIN_D15,	 I/O Standard: 2.5 V,	 Current Strength: Default
@@ -82,6 +85,7 @@ wire \~QUARTUS_CREATED_UNVM~~busy ;
 wire \~QUARTUS_CREATED_ADC1~~eoc ;
 wire \~QUARTUS_CREATED_ADC2~~eoc ;
 wire \clk~output_o ;
+wire \mic_clk~output_o ;
 wire \reset~output_o ;
 wire \mic_data[0]~output_o ;
 wire \mic_data[1]~output_o ;
@@ -142,6 +146,19 @@ defparam \clk~output .bus_hold = "false";
 defparam \clk~output .open_drain_output = "false";
 // synopsys translate_on
 
+// Location: IOOBUF_X0_Y23_N23
+fiftyfivenm_io_obuf \mic_clk~output (
+	.i(gnd),
+	.oe(vcc),
+	.seriesterminationcontrol(16'b0000000000000000),
+	.devoe(devoe),
+	.o(\mic_clk~output_o ),
+	.obar());
+// synopsys translate_off
+defparam \mic_clk~output .bus_hold = "false";
+defparam \mic_clk~output .open_drain_output = "false";
+// synopsys translate_on
+
 // Location: IOOBUF_X22_Y0_N16
 fiftyfivenm_io_obuf \reset~output (
 	.i(gnd),
@@ -155,7 +172,7 @@ defparam \reset~output .bus_hold = "false";
 defparam \reset~output .open_drain_output = "false";
 // synopsys translate_on
 
-// Location: IOOBUF_X0_Y15_N9
+// Location: IOOBUF_X0_Y15_N2
 fiftyfivenm_io_obuf \mic_data[0]~output (
 	.i(gnd),
 	.oe(vcc),
@@ -168,7 +185,7 @@ defparam \mic_data[0]~output .bus_hold = "false";
 defparam \mic_data[0]~output .open_drain_output = "false";
 // synopsys translate_on
 
-// Location: IOOBUF_X78_Y23_N16
+// Location: IOOBUF_X78_Y23_N2
 fiftyfivenm_io_obuf \mic_data[1]~output (
 	.i(gnd),
 	.oe(vcc),
@@ -207,7 +224,7 @@ defparam \mic_data[3]~output .bus_hold = "false";
 defparam \mic_data[3]~output .open_drain_output = "false";
 // synopsys translate_on
 
-// Location: IOOBUF_X62_Y0_N30
+// Location: IOOBUF_X62_Y0_N23
 fiftyfivenm_io_obuf \mic_data[4]~output (
 	.i(gnd),
 	.oe(vcc),
@@ -233,7 +250,7 @@ defparam \mic_data[5]~output .bus_hold = "false";
 defparam \mic_data[5]~output .open_drain_output = "false";
 // synopsys translate_on
 
-// Location: IOOBUF_X78_Y24_N16
+// Location: IOOBUF_X78_Y24_N24
 fiftyfivenm_io_obuf \mic_data[6]~output (
 	.i(gnd),
 	.oe(vcc),
@@ -285,7 +302,7 @@ defparam \mic_data[9]~output .bus_hold = "false";
 defparam \mic_data[9]~output .open_drain_output = "false";
 // synopsys translate_on
 
-// Location: IOOBUF_X0_Y30_N16
+// Location: IOOBUF_X0_Y30_N23
 fiftyfivenm_io_obuf \mic_data[10]~output (
 	.i(gnd),
 	.oe(vcc),
@@ -298,7 +315,7 @@ defparam \mic_data[10]~output .bus_hold = "false";
 defparam \mic_data[10]~output .open_drain_output = "false";
 // synopsys translate_on
 
-// Location: IOOBUF_X0_Y13_N2
+// Location: IOOBUF_X54_Y54_N16
 fiftyfivenm_io_obuf \mic_data[11]~output (
 	.i(gnd),
 	.oe(vcc),
@@ -350,7 +367,7 @@ defparam \height[2]~output .bus_hold = "false";
 defparam \height[2]~output .open_drain_output = "false";
 // synopsys translate_on
 
-// Location: IOOBUF_X69_Y0_N16
+// Location: IOOBUF_X78_Y42_N16
 fiftyfivenm_io_obuf \height[3]~output (
 	.i(gnd),
 	.oe(vcc),
@@ -363,7 +380,7 @@ defparam \height[3]~output .bus_hold = "false";
 defparam \height[3]~output .open_drain_output = "false";
 // synopsys translate_on
 
-// Location: IOOBUF_X34_Y0_N16
+// Location: IOOBUF_X78_Y15_N16
 fiftyfivenm_io_obuf \height[4]~output (
 	.i(gnd),
 	.oe(vcc),
@@ -376,7 +393,7 @@ defparam \height[4]~output .bus_hold = "false";
 defparam \height[4]~output .open_drain_output = "false";
 // synopsys translate_on
 
-// Location: IOOBUF_X78_Y21_N23
+// Location: IOOBUF_X78_Y21_N16
 fiftyfivenm_io_obuf \height[5]~output (
 	.i(gnd),
 	.oe(vcc),
@@ -525,6 +542,8 @@ defparam \~QUARTUS_CREATED_ADC2~ .tsclksel = 0;
 // synopsys translate_on
 
 assign clk = \clk~output_o ;
+
+assign mic_clk = \mic_clk~output_o ;
 
 assign reset = \reset~output_o ;
 

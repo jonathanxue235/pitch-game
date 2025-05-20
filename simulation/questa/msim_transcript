@@ -24,74 +24,30 @@
 # Copying c:/intelfpga_lite/23.1std/questa_fse/win64/../modelsim.ini to modelsim.ini
 # Modifying modelsim.ini
 # 
-# vlog -sv -work work +incdir+C:/Users/jonathanxue/Developer/DAV/pitch-game {C:/Users/jonathanxue/Developer/DAV/pitch-game/get_height_tb.sv}
+# vlog -vlog01compat -work work +incdir+C:/Users/jonathanxue/Developer/DAV/pitch-game/db {C:/Users/jonathanxue/Developer/DAV/pitch-game/db/max10_adc_pll_altpll.v}
 # Questa Intel Starter FPGA Edition-64 vlog 2023.3 Compiler 2023.07 Jul 17 2023
-# Start time: 21:51:19 on May 14,2025
-# vlog -reportprogress 300 -sv -work work "+incdir+C:/Users/jonathanxue/Developer/DAV/pitch-game" C:/Users/jonathanxue/Developer/DAV/pitch-game/get_height_tb.sv 
-# -- Compiling module get_height_tb
+# Start time: 00:38:33 on May 20,2025
+# vlog -reportprogress 300 -vlog01compat -work work "+incdir+C:/Users/jonathanxue/Developer/DAV/pitch-game/db" C:/Users/jonathanxue/Developer/DAV/pitch-game/db/max10_adc_pll_altpll.v 
+# -- Compiling module MAX10_ADC_PLL_altpll
 # 
 # Top level modules:
-# 	get_height_tb
-# End time: 21:51:19 on May 14,2025, Elapsed time: 0:00:00
+# 	MAX10_ADC_PLL_altpll
+# End time: 00:38:33 on May 20,2025, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
-# vlog -sv -work work +incdir+C:/Users/jonathanxue/Developer/DAV/pitch-game {C:/Users/jonathanxue/Developer/DAV/pitch-game/get_height.sv}
-# Questa Intel Starter FPGA Edition-64 vlog 2023.3 Compiler 2023.07 Jul 17 2023
-# Start time: 21:51:19 on May 14,2025
-# vlog -reportprogress 300 -sv -work work "+incdir+C:/Users/jonathanxue/Developer/DAV/pitch-game" C:/Users/jonathanxue/Developer/DAV/pitch-game/get_height.sv 
-# -- Compiling module get_height
-# 
-# Top level modules:
-# 	get_height
-# End time: 21:51:19 on May 14,2025, Elapsed time: 0:00:00
-# Errors: 0, Warnings: 0
-# vlog -sv -work work +incdir+C:/Users/jonathanxue/Developer/DAV/pitch-game {C:/Users/jonathanxue/Developer/DAV/pitch-game/fft.sv}
-# Questa Intel Starter FPGA Edition-64 vlog 2023.3 Compiler 2023.07 Jul 17 2023
-# Start time: 21:51:19 on May 14,2025
-# vlog -reportprogress 300 -sv -work work "+incdir+C:/Users/jonathanxue/Developer/DAV/pitch-game" C:/Users/jonathanxue/Developer/DAV/pitch-game/fft.sv 
-# -- Compiling module fft
-# ** Warning: C:/Users/jonathanxue/Developer/DAV/pitch-game/fft.sv(11): (vlog-13314) Defaulting port 'in' kind to 'var' rather than 'wire' due to default compile option setting of -svinputport=relaxed.
-# 
-# Top level modules:
-# 	fft
-# End time: 21:51:19 on May 14,2025, Elapsed time: 0:00:00
+# vlib mic
+# ** Warning: (vlib-34) Library already exists at "mic".
 # Errors: 0, Warnings: 1
-# vlog -sv -work work +incdir+C:/Users/jonathanxue/Developer/DAV/pitch-game {C:/Users/jonathanxue/Developer/DAV/pitch-game/butterfly.sv}
+# vmap mic mic
+# Questa Intel Starter FPGA Edition-64 vmap 2023.3 Lib Mapping Utility 2023.07 Jul 17 2023
+# vmap mic mic 
+# Modifying modelsim.ini
+# vlog -vlog01compat -work mic +incdir+C:/Users/jonathanxue/Developer/DAV/pitch-game/mic/synthesis {C:/Users/jonathanxue/Developer/DAV/pitch-game/mic/synthesis/mic.v}
 # Questa Intel Starter FPGA Edition-64 vlog 2023.3 Compiler 2023.07 Jul 17 2023
-# Start time: 21:51:19 on May 14,2025
-# vlog -reportprogress 300 -sv -work work "+incdir+C:/Users/jonathanxue/Developer/DAV/pitch-game" C:/Users/jonathanxue/Developer/DAV/pitch-game/butterfly.sv 
-# -- Compiling module butterfly
+# Start time: 00:38:33 on May 20,2025
+# vlog -reportprogress 300 -vlog01compat -work mic "+incdir+C:/Users/jonathanxue/Developer/DAV/pitch-game/mic/synthesis" C:/Users/jonathanxue/Developer/DAV/pitch-game/mic/synthesis/mic.v 
+# -- Compiling module mic
 # 
 # Top level modules:
-# 	butterfly
-# End time: 21:51:19 on May 14,2025, Elapsed time: 0:00:00
+# 	mic
+# End time: 00:38:33 on May 20,2025, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
-# 
-# vlog -sv -work work +incdir+C:/Users/jonathanxue/Developer/DAV/pitch-game {C:/Users/jonathanxue/Developer/DAV/pitch-game/adc_sound_filter_tb.sv}
-# Questa Intel Starter FPGA Edition-64 vlog 2023.3 Compiler 2023.07 Jul 17 2023
-# Start time: 21:51:19 on May 14,2025
-# vlog -reportprogress 300 -sv -work work "+incdir+C:/Users/jonathanxue/Developer/DAV/pitch-game" C:/Users/jonathanxue/Developer/DAV/pitch-game/adc_sound_filter_tb.sv 
-# ** Error: (vlog-7) Failed to open design unit file "C:/Users/jonathanxue/Developer/DAV/pitch-game/adc_sound_filter_tb.sv" in read mode.
-# No such file or directory. (errno = ENOENT)
-# End time: 21:51:19 on May 14,2025, Elapsed time: 0:00:00
-# Errors: 1, Warnings: 0
-# ** Error: c:/intelfpga_lite/23.1std/questa_fse/win64/vlog failed.
-# Error in macro ./pitch_game_top_run_msim_rtl_systemverilog.do line 13
-# c:/intelfpga_lite/23.1std/questa_fse/win64/vlog failed.
-#     while executing
-# "vlog -sv -work work +incdir+C:/Users/jonathanxue/Developer/DAV/pitch-game {C:/Users/jonathanxue/Developer/DAV/pitch-game/adc_sound_filter_tb.sv}"
-vsim work.get_height_tb
-# vsim work.get_height_tb 
-# Start time: 21:51:23 on May 14,2025
-# ** Note: (vsim-3812) Design is being optimized...
-# ** Warning: C:/Users/jonathanxue/Developer/DAV/pitch-game/fft.sv(11): (vopt-13314) Defaulting port 'in' kind to 'var' rather than 'wire' due to default compile option setting of -svinputport=relaxed.
-# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=0, Warnings=1.
-# Loading sv_std.std
-# Loading work.get_height_tb(fast)
-add wave -position insertpoint  \
-sim:/get_height_tb/clk \
-sim:/get_height_tb/reset \
-sim:/get_height_tb/mic_data \
-sim:/get_height_tb/height
-run -all
-# End time: 21:51:53 on May 14,2025, Elapsed time: 0:00:30
-# Errors: 0, Warnings: 1
