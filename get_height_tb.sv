@@ -1,23 +1,29 @@
+
 `timescale 1ns / 1ns
 module get_height_tb (
     // DUT Inputs
     output logic clk,
 	 output logic mic_clk,
     output logic reset,
-    output logic [11:0] mic_data,
-
+    output logic [11:0] mic_data
+	 //output logic [15:0] mic_data_shift[63:0]
     // DUT Outputs
-    output logic [9:0] height
+	 //output logic [9:0] height_history [15:0],
+	 //output logic [13:0] sum_of_heights,
+    //output logic [9:0] height
 );
 
+
+wire [15:0] mic_data_shift[63:0];
 // Instantiate the Device Under Test (DUT)
 get_height DUT (
     .clk(clk),
 	 .mic_clk(mic_clk),
     .reset(reset),
     .mic_data(mic_data),
-    .height(height)
+	 .mic_data_shift(mic_data_shift)
 );
+
 
 // Clock generation
 initial begin

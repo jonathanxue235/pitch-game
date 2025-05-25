@@ -11,7 +11,7 @@ cModel Technology
 Z0 dC:/Users/jonathanxue/Developer/DAV/pitch-game/simulation/questa
 valtera_modular_adc_control
 2C:/Users/jonathanxue/Developer/DAV/pitch-game/mic/synthesis/submodules/altera_modular_adc_control.v
-Z1 !s110 1747719130
+Z1 !s110 1748144946
 !i10b 1
 !s100 XO4emJ3RKaWob@K6gm7Xe1
 I6R:MK=FdoB_^L<N?Q7>_e3
@@ -19,14 +19,14 @@ R0
 Z2 w1747027216
 8C:/Users/jonathanxue/Developer/DAV/pitch-game/mic/synthesis/submodules/altera_modular_adc_control.v
 FC:/Users/jonathanxue/Developer/DAV/pitch-game/mic/synthesis/submodules/altera_modular_adc_control.v
-!i122 32
+!i122 48
 L0 31 137
 Z3 VDg1SIo80bB@j0V0VzS_@n1
 Z4 OL;L;2023.3;77
 r1
 !s85 0
 31
-Z5 !s108 1747719130.000000
+Z5 !s108 1748144946.000000
 !s107 C:/Users/jonathanxue/Developer/DAV/pitch-game/mic/synthesis/submodules/altera_modular_adc_control.v|
 !s90 -reportprogress|300|-vlog01compat|-work|mic|+incdir+C:/Users/jonathanxue/Developer/DAV/pitch-game/mic/synthesis/submodules|C:/Users/jonathanxue/Developer/DAV/pitch-game/mic/synthesis/submodules/altera_modular_adc_control.v|
 !i113 0
@@ -43,7 +43,7 @@ R0
 R2
 8C:/Users/jonathanxue/Developer/DAV/pitch-game/mic/synthesis/submodules/altera_modular_adc_control_avrg_fifo.v
 FC:/Users/jonathanxue/Developer/DAV/pitch-game/mic/synthesis/submodules/altera_modular_adc_control_avrg_fifo.v
-!i122 33
+!i122 49
 L0 66 54
 R3
 R4
@@ -67,7 +67,7 @@ R0
 R2
 8C:/Users/jonathanxue/Developer/DAV/pitch-game/mic/synthesis/submodules/altera_modular_adc_control_fsm.v
 FC:/Users/jonathanxue/Developer/DAV/pitch-game/mic/synthesis/submodules/altera_modular_adc_control_fsm.v
-!i122 34
+!i122 50
 L0 31 978
 R3
 R4
@@ -91,7 +91,7 @@ R0
 R2
 8C:/Users/jonathanxue/Developer/DAV/pitch-game/mic/synthesis/submodules/altera_modular_adc_sample_store.v
 FC:/Users/jonathanxue/Developer/DAV/pitch-game/mic/synthesis/submodules/altera_modular_adc_sample_store.v
-!i122 35
+!i122 51
 L0 31 199
 R3
 R4
@@ -115,7 +115,7 @@ R0
 R2
 8C:/Users/jonathanxue/Developer/DAV/pitch-game/mic/synthesis/submodules/altera_modular_adc_sample_store_ram.v
 FC:/Users/jonathanxue/Developer/DAV/pitch-game/mic/synthesis/submodules/altera_modular_adc_sample_store_ram.v
-!i122 36
+!i122 52
 L0 66 80
 R3
 R4
@@ -139,7 +139,7 @@ R0
 R2
 8C:/Users/jonathanxue/Developer/DAV/pitch-game/mic/synthesis/submodules/altera_modular_adc_sequencer.v
 FC:/Users/jonathanxue/Developer/DAV/pitch-game/mic/synthesis/submodules/altera_modular_adc_sequencer.v
-!i122 37
+!i122 53
 L0 31 388
 R3
 R4
@@ -163,7 +163,7 @@ R0
 R2
 8C:/Users/jonathanxue/Developer/DAV/pitch-game/mic/synthesis/submodules/altera_modular_adc_sequencer_csr.v
 FC:/Users/jonathanxue/Developer/DAV/pitch-game/mic/synthesis/submodules/altera_modular_adc_sequencer_csr.v
-!i122 38
+!i122 54
 L0 31 110
 R3
 R4
@@ -179,7 +179,7 @@ R7
 R8
 valtera_modular_adc_sequencer_ctrl
 2C:/Users/jonathanxue/Developer/DAV/pitch-game/mic/synthesis/submodules/altera_modular_adc_sequencer_ctrl.v
-R1
+Z9 !s110 1748144947
 !i10b 1
 !s100 I>L[OjQD@1HO9iezOB=Og0
 I=G`kf2S4B=K8Y9]P7IT9:0
@@ -187,7 +187,7 @@ R0
 R2
 8C:/Users/jonathanxue/Developer/DAV/pitch-game/mic/synthesis/submodules/altera_modular_adc_sequencer_ctrl.v
 FC:/Users/jonathanxue/Developer/DAV/pitch-game/mic/synthesis/submodules/altera_modular_adc_sequencer_ctrl.v
-!i122 39
+!i122 55
 L0 31 303
 R3
 R4
@@ -211,7 +211,7 @@ R0
 R2
 8C:/Users/jonathanxue/Developer/DAV/pitch-game/mic/synthesis/submodules/altera_up_avalon_adv_adc.v
 FC:/Users/jonathanxue/Developer/DAV/pitch-game/mic/synthesis/submodules/altera_up_avalon_adv_adc.v
-!i122 31
+!i122 47
 L0 23 668
 R3
 R4
@@ -227,7 +227,7 @@ R7
 R8
 vchsel_code_converter_sw_to_hw
 2C:/Users/jonathanxue/Developer/DAV/pitch-game/mic/synthesis/submodules/chsel_code_converter_sw_to_hw.v
-R1
+R9
 !i10b 1
 !s100 89]`JaS:7B3mZm`FHV=N?2
 IH9`ag90MN@J?gWWWLSlV]3
@@ -235,14 +235,14 @@ R0
 R2
 8C:/Users/jonathanxue/Developer/DAV/pitch-game/mic/synthesis/submodules/chsel_code_converter_sw_to_hw.v
 FC:/Users/jonathanxue/Developer/DAV/pitch-game/mic/synthesis/submodules/chsel_code_converter_sw_to_hw.v
-!i122 40
+!i122 56
 L0 45 178
 R3
 R4
 r1
 !s85 0
 31
-R5
+Z10 !s108 1748144947.000000
 !s107 C:/Users/jonathanxue/Developer/DAV/pitch-game/mic/synthesis/submodules/chsel_code_converter_sw_to_hw.v|
 !s90 -reportprogress|300|-vlog01compat|-work|mic|+incdir+C:/Users/jonathanxue/Developer/DAV/pitch-game/mic/synthesis/submodules|C:/Users/jonathanxue/Developer/DAV/pitch-game/mic/synthesis/submodules/chsel_code_converter_sw_to_hw.v|
 !i113 0
@@ -251,7 +251,7 @@ R7
 R8
 vDE10_Lite_ADC_Core_modular_adc_0
 2C:/Users/jonathanxue/Developer/DAV/pitch-game/mic/synthesis/submodules/DE10_Lite_ADC_Core_modular_adc_0.v
-R1
+R9
 !i10b 1
 !s100 GkG749g=BEGzKMin;@d;e3
 IdG;E4j<HbHaAP>AU4QKBZ1
@@ -259,14 +259,14 @@ R0
 R2
 8C:/Users/jonathanxue/Developer/DAV/pitch-game/mic/synthesis/submodules/DE10_Lite_ADC_Core_modular_adc_0.v
 FC:/Users/jonathanxue/Developer/DAV/pitch-game/mic/synthesis/submodules/DE10_Lite_ADC_Core_modular_adc_0.v
-!i122 41
+!i122 57
 L0 22 269
 R3
 R4
 r1
 !s85 0
 31
-R5
+R10
 !s107 C:/Users/jonathanxue/Developer/DAV/pitch-game/mic/synthesis/submodules/DE10_Lite_ADC_Core_modular_adc_0.v|
 !s90 -reportprogress|300|-vlog01compat|-work|mic|+incdir+C:/Users/jonathanxue/Developer/DAV/pitch-game/mic/synthesis/submodules|C:/Users/jonathanxue/Developer/DAV/pitch-game/mic/synthesis/submodules/DE10_Lite_ADC_Core_modular_adc_0.v|
 !i113 0
@@ -276,7 +276,7 @@ R8
 n@d@e10_@lite_@a@d@c_@core_modular_adc_0
 vfiftyfivenm_adcblock_primitive_wrapper
 2C:/Users/jonathanxue/Developer/DAV/pitch-game/mic/synthesis/submodules/fiftyfivenm_adcblock_primitive_wrapper.v
-R1
+R9
 !i10b 1
 !s100 9O0^c8QO^PaUf9cna?iW?3
 I1L9Ez?GDk4]i5il4L_hiG3
@@ -284,14 +284,14 @@ R0
 R2
 8C:/Users/jonathanxue/Developer/DAV/pitch-game/mic/synthesis/submodules/fiftyfivenm_adcblock_primitive_wrapper.v
 FC:/Users/jonathanxue/Developer/DAV/pitch-game/mic/synthesis/submodules/fiftyfivenm_adcblock_primitive_wrapper.v
-!i122 42
+!i122 58
 L0 50 207
 R3
 R4
 r1
 !s85 0
 31
-R5
+R10
 !s107 C:/Users/jonathanxue/Developer/DAV/pitch-game/mic/synthesis/submodules/fiftyfivenm_adcblock_primitive_wrapper.v|
 !s90 -reportprogress|300|-vlog01compat|-work|mic|+incdir+C:/Users/jonathanxue/Developer/DAV/pitch-game/mic/synthesis/submodules|C:/Users/jonathanxue/Developer/DAV/pitch-game/mic/synthesis/submodules/fiftyfivenm_adcblock_primitive_wrapper.v|
 !i113 0
@@ -300,7 +300,7 @@ R7
 R8
 vfiftyfivenm_adcblock_top_wrapper
 2C:/Users/jonathanxue/Developer/DAV/pitch-game/mic/synthesis/submodules/fiftyfivenm_adcblock_top_wrapper.v
-R1
+R9
 !i10b 1
 !s100 ?zT=;@flJa1TF_zjdUTIL3
 I:34EaCS65j9IFel=9ZaP21
@@ -308,14 +308,14 @@ R0
 R2
 8C:/Users/jonathanxue/Developer/DAV/pitch-game/mic/synthesis/submodules/fiftyfivenm_adcblock_top_wrapper.v
 FC:/Users/jonathanxue/Developer/DAV/pitch-game/mic/synthesis/submodules/fiftyfivenm_adcblock_top_wrapper.v
-!i122 43
+!i122 59
 L0 44 218
 R3
 R4
 r1
 !s85 0
 31
-R5
+R10
 !s107 C:/Users/jonathanxue/Developer/DAV/pitch-game/mic/synthesis/submodules/fiftyfivenm_adcblock_top_wrapper.v|
 !s90 -reportprogress|300|-vlog01compat|-work|mic|+incdir+C:/Users/jonathanxue/Developer/DAV/pitch-game/mic/synthesis/submodules|C:/Users/jonathanxue/Developer/DAV/pitch-game/mic/synthesis/submodules/fiftyfivenm_adcblock_top_wrapper.v|
 !i113 0
@@ -324,7 +324,7 @@ R7
 R8
 vmic
 2C:/Users/jonathanxue/Developer/DAV/pitch-game/mic/synthesis/mic.v
-!s110 1747726713
+R1
 !i10b 1
 !s100 ^l:9>Oak?<ZjSKV0I5AHe2
 IQT<ShfY[j3L?HnOX:4^IU3
@@ -332,14 +332,14 @@ R0
 w1747027211
 8C:/Users/jonathanxue/Developer/DAV/pitch-game/mic/synthesis/mic.v
 FC:/Users/jonathanxue/Developer/DAV/pitch-game/mic/synthesis/mic.v
-!i122 45
+!i122 46
 L0 6 38
 R3
 R4
 r1
 !s85 0
 31
-!s108 1747726713.000000
+R5
 !s107 C:/Users/jonathanxue/Developer/DAV/pitch-game/mic/synthesis/mic.v|
 !s90 -reportprogress|300|-vlog01compat|-work|mic|+incdir+C:/Users/jonathanxue/Developer/DAV/pitch-game/mic/synthesis|C:/Users/jonathanxue/Developer/DAV/pitch-game/mic/synthesis/mic.v|
 !i113 0
@@ -348,7 +348,7 @@ R6
 R8
 vmic_adc_mega_0
 2C:/Users/jonathanxue/Developer/DAV/pitch-game/mic/synthesis/submodules/mic_adc_mega_0.v
-!s110 1747719131
+R9
 !i10b 1
 !s100 Q2NgVfg6fZNPXcgkUYm@n2
 I_jIL_nI=P:6ezS@VOUeQ`0
@@ -356,14 +356,14 @@ R0
 R2
 8C:/Users/jonathanxue/Developer/DAV/pitch-game/mic/synthesis/submodules/mic_adc_mega_0.v
 FC:/Users/jonathanxue/Developer/DAV/pitch-game/mic/synthesis/submodules/mic_adc_mega_0.v
-!i122 44
+!i122 60
 L0 22 67
 R3
 R4
 r1
 !s85 0
 31
-!s108 1747719131.000000
+R10
 !s107 C:/Users/jonathanxue/Developer/DAV/pitch-game/mic/synthesis/submodules/mic_adc_mega_0.v|
 !s90 -reportprogress|300|-vlog01compat|-work|mic|+incdir+C:/Users/jonathanxue/Developer/DAV/pitch-game/mic/synthesis/submodules|C:/Users/jonathanxue/Developer/DAV/pitch-game/mic/synthesis/submodules/mic_adc_mega_0.v|
 !i113 0

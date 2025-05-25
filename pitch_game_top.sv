@@ -7,8 +7,8 @@ module pitch_game_top (
 
 
      // output horizontal and vertical counters for communication with graphics module
-	output logic [9:0] xpos,
-	output logic [9:0] ypos,
+	//output logic [9:0] xpos,
+	//output logic [9:0] ypos,
 
     // VGA outputs
 	output logic hsync,
@@ -26,6 +26,9 @@ module pitch_game_top (
 	//output logic vga_clk
     
 );
+
+logic [9:0] xpos;
+logic [9:0] ypos;
 
 logic reset;
 logic start_button;
@@ -57,7 +60,7 @@ logic vga_clk;
 logic [11:0] mic_data;
 logic mic_freq;
 
-
+logic [15:0] mic_data_shift [63:0];
 
 
 
@@ -72,6 +75,8 @@ clock_divider mic_sample(
 );
 
 
+logic [15:0] fft_out [63:0];
+
 get_height get_height_inst (
     // Input
     .clk(clk),
@@ -80,9 +85,12 @@ get_height get_height_inst (
     //.mic_data(mic_data),
 
     // Output
-    .height(bird_y)
+    .height(bird_y),
+	 //.fft_out(fft_out),
+	 .mic_data_shift(mic_data_shift)
 );
 
+//assign bird_y = 100;
 
 logic collided;
 logic position_reset;
@@ -164,7 +172,40 @@ clock_divider game_clock_divider (
     .clk_out(enable)
 );
 
+logic [7:0] fft_vol [63:0];
+always_comb begin
+	for (int i = 0; i < 64; i++) begin
+		fft_vol[i] = fft_out[i] >> 8;
+	end
+end
 
+logic [7:0] mic_vol [63:0];
+always_comb begin
+	for (int i = 0; i < 64; i++) begin
+		mic_vol[i] = mic_data_shift[i] >> 8;
+	end
+end
+
+
+always_comb begin
+	if (xpos < 256 && ypos >= (480 - fft_vol[xpos >> 2])) begin
+		input_red = 3'b111;
+		input_green = 3'b111;
+		input_blue = 2'b00;
+	end else if (xpos > 300 && ypos >= (480 - mic_vol[(xpos - 300) >> 2])) begin
+		input_red = 3'b111;
+		input_green = 3'b111;
+		input_blue = 2'b00;
+		
+	end else begin
+		input_red = 3'b000;
+		input_green = 3'b000;
+		input_blue = 2'b00;
+	end
+
+end
+
+/*
 always_comb begin
     if (bird_x - bird_width <= xpos && bird_x + bird_width >= xpos && bird_y - bird_height <= ypos && bird_y + bird_height >= ypos) begin
         input_red = 3'b111;
@@ -182,6 +223,7 @@ always_comb begin
         input_blue = 2'b11;
     end
 end
+*/
 
 
 

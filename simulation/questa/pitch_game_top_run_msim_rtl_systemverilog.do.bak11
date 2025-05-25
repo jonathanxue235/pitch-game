@@ -5,9 +5,10 @@ if {[file exists rtl_work]} {
 vlib rtl_work
 vmap work rtl_work
 
+vlog -sv -work work +incdir+C:/Users/jonathanxue/Developer/DAV/pitch-game {C:/Users/jonathanxue/Developer/DAV/pitch-game/fft_16.sv}
 vlog -sv -work work +incdir+C:/Users/jonathanxue/Developer/DAV/pitch-game {C:/Users/jonathanxue/Developer/DAV/pitch-game/get_height_tb.sv}
 vlog -sv -work work +incdir+C:/Users/jonathanxue/Developer/DAV/pitch-game {C:/Users/jonathanxue/Developer/DAV/pitch-game/get_height.sv}
-vlog -sv -work work +incdir+C:/Users/jonathanxue/Developer/DAV/pitch-game {C:/Users/jonathanxue/Developer/DAV/pitch-game/fft.sv}
+vlog -sv -work work +incdir+C:/Users/jonathanxue/Developer/DAV/pitch-game {C:/Users/jonathanxue/Developer/DAV/pitch-game/butterfly.sv}
 
 vlog -sv -work work +incdir+C:/Users/jonathanxue/Developer/DAV/pitch-game {C:/Users/jonathanxue/Developer/DAV/pitch-game/adc_sound_filter_tb.sv}
 
